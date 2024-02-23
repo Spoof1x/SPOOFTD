@@ -1,0 +1,14 @@
+<root>
+    <scripts>
+            <include src="file://{resources}/layout/custom_game/timers/start_game.js" />
+    </scripts>
+     <styles>
+            <include src="file://{resources}/layout/custom_game/timers/start_game.css" />
+    </styles>
+    <Panel class="main" style="height:100%; width:100%;" hittest="false">
+        <Panel id="timer" class="timers">
+            <Label id="timer_text" class="timer_text" text="Игра скоро начнется!" />
+            <Label id="time" class="time" text="5"/>
+        </Panel>
+    </Panel>
+</root>

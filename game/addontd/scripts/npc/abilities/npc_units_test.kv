@@ -1,0 +1,35 @@
+"DOTAAbilities"
+{
+    "npc_dota_test"
+    {
+        "BaseClass"                     "ability_datadriven"
+        "MaxLevel"                         "1"
+        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+        "AbilityCastPoint"                "0"
+        "Building"                        "1" //bool
+        "BuildingSize"                    "2"
+        "BuildTime"                        "2"
+        "ModelRotation"  "90.0"
+
+        "AbilityCastRange"                "200"
+        "UpdateHealth"                    "1" //bool
+        "UnitName"                        "npc_dota_test"
+        "Scale"                            "1" //bool
+        "PlayerCanControl"                "1"
+        "AbilityCooldown"                "0"
+        "AbilityGoldCost"  "1"
+        "AbilitySpecial"
+        {
+
+        }
+
+        "OnSpellStart"
+        {
+            "RunScript"
+            {
+                "ScriptFile"    "builder.lua"
+                "Function"        "Build"
+            }
+        }
+    }
+}

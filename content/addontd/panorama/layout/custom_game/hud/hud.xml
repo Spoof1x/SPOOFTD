@@ -1,0 +1,20 @@
+<root>
+   <scripts>
+            <include src="file://{resources}/layout/custom_game/hud/hud.js" />
+    </scripts>
+    <styles>
+            <include src="file://{resources}/layout/custom_game/hud/hud.css" />
+    </styles>
+
+    <Panel style="height:100%; width:100%;" hittest="false">
+        <Panel id="main" class="main" style="height:100%; width:100%;" hittest="false">
+            <Panel id="Gold" class="Gold" style="height:100%; width:100%;" hittest="false">
+                <Label id="GoldLabel" class="GoldLabel" text="600"/>
+                <Panel id="GoldIcon" hittest="false">
+                    
+                </Panel>
+
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

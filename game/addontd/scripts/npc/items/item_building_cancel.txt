@@ -1,0 +1,27 @@
+"DOTAAbilities"
+{
+
+	"item_building_cancel"
+	{
+		"BaseClass"             		"item_datadriven"
+		"AbilityTextureName"			"item_cancel"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"		"4"
+		"ItemShareability" "1"
+		
+
+		"ItemDroppable" 				"1"
+		"ItemPurchasable" 				"0"
+		"ItemSellable"					"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"CancelBuilding"
+			}
+		}
+	}
+}

@@ -1,0 +1,10 @@
+﻿"lang"
+{
+	"Language"		"English"
+	"Tokens"
+	{		
+		"addon_game_name"			"SpoofTD"
+		"DOTA_CUSTOM1"  "Custom_team1"
+		"DOTA_CUSTOM2"  "Custom_team2"
+	}
+}

@@ -1,0 +1,21 @@
+"DOTAHeroes"
+{
+	"npc_dota_hero_antimage"
+	    {   
+	        "StatusHealth"   "45"
+	        "Ability1"  "fire_tower"
+	        "Ability2"  "water_tower"
+	        "Ability3"  ""
+	        "Ability6"  ""
+	        "AttributeBaseStrength"		"0"
+		"AttributeStrengthGain"		"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0"
+	        "MovementSpeed"        "550"
+	        "StatusHealth"   "110"
+	        "StatusHealthRegen"  "0"
+	        
+	    }
+}

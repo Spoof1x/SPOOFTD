@@ -1,0 +1,11 @@
+<root>
+    <scripts>
+            <include src="file://{resources}/scripts/hiden_dota_hud.js" />
+    </scripts>
+    <Panel>
+        <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/building_helper.xml" />
+        <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/selection.xml" />
+        <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/timers/start_game.xml" />
+        <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/hud/hud.xml" />
+    </Panel>
+</root> 

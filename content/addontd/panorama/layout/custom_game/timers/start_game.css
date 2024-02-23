@@ -1,0 +1,29 @@
+#timer {
+    background-color: rgba(14, 122, 86, 0);
+    height: 300px;
+    width: 500px;
+    horizontal-align: center;
+    vertical-align: center;
+    margin-bottom: 600px;
+}
+#timer_text {
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 30px;
+    color: #000000;
+    text-align: center;
+    horizontal-align: center;
+    vertical-align: top;
+}
+#time{
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 30px;
+    color: #000000;
+    text-align: center;
+    horizontal-align: center;
+    vertical-align: top;
+    margin-top: 50px;
+}

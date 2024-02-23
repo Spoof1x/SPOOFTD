@@ -1,0 +1,13 @@
+﻿"lang"
+{
+	"Language"		"Russian"
+	"Tokens"
+	{		
+		"addon_game_name"			"SpoofTD"
+        "DOTA_GOODGUYS"    "Команда поросят"
+        "DOTA_BADGUYS"    "Команда крокодилов"
+        "DOTA_CUSTOM1"  "Команда огурчиков"
+        "DOTA_CUSTOM2"  "Команда помидорчиков"
+		"not_enough_gold" "Не хватает золота"
+	}
+}
