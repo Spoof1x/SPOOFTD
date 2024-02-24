@@ -8,6 +8,12 @@
 
     <Panel style="height:100%; width:100%;" hittest="false">
         <Panel id="main" class="main" style="height:100%; width:100%;" hittest="false">
+
+
+
+            <Panel id="wave" class="wave" hittest="false" style="height:100%; width:100%;">
+                <Label id="CountCreep" class="CountCreep" text="0" />
+            </Panel>
             <Panel id="Gold" class="Gold" style="height:100%; width:100%;" hittest="false">
                 <Label id="GoldLabel" class="GoldLabel" text="600"/>
                 <Panel id="GoldIcon" hittest="false">

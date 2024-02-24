@@ -3,7 +3,7 @@ function triger_good(event)
 
     if event.activator:IsRealHero() then return end
 
-    UTIL_Remove(creep)
+    creep:Kill(nil,creep)
 
     local unitName = event.activator.unitname
 
@@ -31,7 +31,7 @@ function triger_bad(event)
 
     if event.activator:IsRealHero() then return end
 
-    UTIL_Remove(creep)
+    creep:Kill(nil,creep)
 
     local unitName = event.activator.unitname
 
@@ -58,7 +58,7 @@ function triger_custom1(event)
 
     if event.activator:IsRealHero() then return end
 
-    UTIL_Remove(creep)
+    creep:Kill(nil,creep)
 
     local unitName = event.activator.unitname
 
@@ -85,7 +85,7 @@ function triger_custom2(event)
 
     if event.activator:IsRealHero() then return end
 
-    UTIL_Remove(creep)
+    creep:Kill(nil,creep)
 
     local unitName = event.activator.unitname
 

@@ -826,10 +826,10 @@ end
     UpgradeBuilding
     * Replaces a building by a new one by name, updating the necessary references and returning the new created unit
 ]]
-function BuildingHelper:UpgradeBuilding(building, index)
+function BuildingHelper:UpgradeBuilding(building)
     local oldBuildingName = building:GetUnitName()
-    local upgradeTable = BuildingHelper.UnitKV[oldBuildingName]["Upgrade"]
-    local newName = upgradeTable[tostring(index + 1)]
+    local upgradeName = BuildingHelper.UnitKV[oldBuildingName]["Upgrade"]
+    local newName = upgradeName
     local gold_cost = BuildingHelper.UnitKV[newName]["sell"]
     
     
@@ -919,7 +919,7 @@ function BuildingHelper:UpgradeBuilding(building, index)
     -- Kill the old building
     building:AddEffects(EF_NODRAW) --Hide it, so that it's still accessible after this script
     building.upgraded = true --Skips visual effects
-    building:Kill(nil, building) --This will call RemoveBuilding
+    UTIL_Remove(building)
 
     -- Block the grid
     newBuilding.construction_size = BuildingHelper:GetConstructionSize(newName)

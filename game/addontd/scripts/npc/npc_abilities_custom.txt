@@ -1,3 +1,5 @@
+#base "abilities/towers/towers.txt"
+
 "DOTAAbilities"
 {
     "destroyer"
@@ -16,50 +18,5 @@
             }
         }
     }
-    "fire_tower"
-    {
-        "UnitName"						"fire_tower"	//Юнит которого создаёт способность
-		"BaseClass"             		"ability_datadriven"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityCastPoint"				"0"
-		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
-		"PlayerCanControl"				"1"		//Позволяет управлять зданием
-		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
-
-		"AbilityCastRange"				"200"
-		"AbilityGoldCost"				"125"	
-		"AbilityCooldown"				"0"
-        "OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"builder.lua"
-				"Function"		"Build"
-			}
-		}
-    }
-    "water_tower"
-    {
-        "UnitName"						"water_tower"	//Юнит которого создаёт способность
-		"BaseClass"             		"ability_datadriven"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityCastPoint"				"0"
-		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
-		"PlayerCanControl"				"1"		//Позволяет управлять зданием
-		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
-
-		"AbilityCastRange"				"200"
-		"AbilityGoldCost"				"125"	
-		"AbilityCooldown"				"0"
-        "OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"builder.lua"
-				"Function"		"Build"
-			}
-		}
-    }
+    
 }

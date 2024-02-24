@@ -1,0 +1,381 @@
+"DOTAUnits"
+{
+	"fire_tower"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/heroes/arc_warden/arc_warden.vmdl"
+        "Creature"
+        {
+            "AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "556" } 
+				
+			}
+        }
+        "ModelScale" 				"1"
+        "SoundSet"                  "n_creep_Ranged"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "1"
+        "sell"                      "5"     //Цена продажи
+        "BuildTime"                 "3"     //Время строительства
+
+        "Ability1"					"destroyer"		
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "10"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"1"		
+		"AttackDamageMax"			"1"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" 
+		"ProjectileSpeed"			"1100"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+
+        // "UpgradeCost"               "20"                         //Стоимость улучшения
+        // "Upgrade"                   "npc_dota_base_tower_up"     //Здание в которое улучшается этот тавер
+    }
+    "water_tower"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/heroes/morphling/morphling.vmdl"
+        "Creature"
+        {
+            "AttachWearables"
+			{
+			    "Wearable1" { "ItemDef" "556" } 
+				
+			}
+        }
+        "ModelScale" 				"1.5"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "1"
+        "sell"                      "10"     //Цена продажи
+        "BuildTime"                 "1"     //Время строительства
+
+        "Ability1"					"destroyer"		
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "10"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"950"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+
+        // "UpgradeCost"               "20"                         //Стоимость улучшения
+        // "Upgrade"                   "npc_dota_base_tower_up"     //Здание в которое улучшается этот тавер
+    }
+    "gold_tower"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/props_gameplay/gold_bag.vmdl"
+        
+        "ModelScale" 				"2.3"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "1"
+        "sell"                      "25"     //Цена продажи
+        "BuildTime"                 "5"     //Время строительства
+
+        "Ability1"					"destroyer"
+        "Ability2"                  "building_upgrade"	
+        "Ability3"					"GoldMine"
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "100"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		""
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"750"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+        "UpgradeCost"  "25"
+        "Upgrade"                   "gold_tower_upgrade1"
+
+
+    }
+    "gold_tower_upgrade1"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/props_gameplay/gold_bag.vmdl"
+        
+        "ModelScale" 				"2.7"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "2"
+        "sell"                      "45"     //Цена продажи
+        "BuildTime"                 "5"     //Время строительства
+
+        "Ability1"					"destroyer"
+        "Ability2"                  "building_upgrade"	
+        "Ability3"					"GoldMine"
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "100"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		""
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"750"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+        "UpgradeCost"  "50"
+        "Upgrade"                   "gold_tower_upgrade2"
+        
+    }
+    "gold_tower_upgrade2"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/props_gameplay/gold_bag.vmdl"
+        
+        "ModelScale" 				"3"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "3"
+        "sell"                      "50"     //Цена продажи
+        "BuildTime"                 "5"     //Время строительства
+
+        "Ability1"					"destroyer"
+        "Ability2"                  "building_upgrade"	
+        "Ability3"					"GoldMine"
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "100"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		""
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"750"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+        "UpgradeCost"  "65"
+        "Upgrade"                   "gold_tower_upgrade3"
+        
+    }
+    "gold_tower_upgrade3"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/props_gameplay/gold_bag.vmdl"
+        
+        "ModelScale" 				"3"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "4"
+        "sell"                      "90"     //Цена продажи
+        "BuildTime"                 "5"     //Время строительства
+
+        "Ability1"					"destroyer"
+        "Ability2"                  ""	
+        "Ability3"					"GoldMine"
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "100"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		""
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"750"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+        
+    }
+    
+    
+}

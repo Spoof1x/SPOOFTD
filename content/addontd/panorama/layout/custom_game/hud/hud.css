@@ -40,3 +40,11 @@
 .left2 {
     margin-left: 195px;
 }
+
+
+#CountCreep {
+    font-size: 50px;
+    color: darkorange;
+    horizontal-align: center;
+    vertical-align: center;
+}

@@ -1,0 +1,19 @@
+"DOTAUnits"
+{
+    "npc_dota_neutral_kobold"
+    {
+        "UseNeutralCreepBehavior"   "0"
+        "AttackCapabilities"		""
+        "ModelScale" "0.9"
+        "Model"  "models/travis/travis.vmdl"
+        "DisableWearables" "1"
+        "damage"   "1"
+        
+        "ArmorPhysical"                "0"        
+        "MagicalResistance"                "0"   
+        "MovementCapabilities"        "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"                "250"        
+        "MovementTurnRate"            "0.5"
+    }
+    
+}

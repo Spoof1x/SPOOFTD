@@ -4,10 +4,59 @@
 	"Tokens"
 	{		
 		"addon_game_name"			"SpoofTD"
+		// названия команд 
         "DOTA_GOODGUYS"    "Команда поросят"
         "DOTA_BADGUYS"    "Команда крокодилов"
         "DOTA_CUSTOM1"  "Команда огурчиков"
         "DOTA_CUSTOM2"  "Команда помидорчиков"
-		"not_enough_gold" "Не хватает золота"
+		
+		
+		
+		
+		
+
+
+
+		// gold tower
+		"gold_tower" "Башня золота"
+		"gold_tower_upgrade1"  "Башня золото 2 уровня"
+		"gold_tower_upgrade2"  "Башня золото 3 уровня"
+		"gold_tower_upgrade3"  "Башня золото 4 уровня"
+
+
+		// water tower
+
+		"water_tower"  "Водная Башня"
+
+		// fire tower
+
+		"fire_tower"  "Огненная Башня"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// upgrade tower
+		"DOTA_Tooltip_ability_building_upgrade"  "Прокачка Башни"
+		"DOTA_Tooltip_ability_building_upgrade_Description" "Прокачивает определенную Башню на следующий уровень"
+
+
+
+		//  GoldMine
+		"DOTA_Tooltip_ability_GoldMine"  "ЗОЛОТО"
+		"DOTA_Tooltip_ability_GoldMine_Description"  "Каждые несколько секунд дает золото, зависит от уровня тавера"
+		"DOTA_Tooltip_ability_GoldMine_GoldPerSecond" "Золото:"
+
+
 	}
 }

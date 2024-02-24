@@ -8,10 +8,9 @@ function building_upgrade:GetGoldCost()
 end 
 
 function building_upgrade:OnSpellStart()
-    local caster = self:GetCaster()
-    local abilityIndex = self:GetAbilityIndex()
     
-    local newBuilding = BuildingHelper:UpgradeBuilding(caster, abilityIndex)
+    local caster = self:GetCaster()
+    local newBuilding = BuildingHelper:UpgradeBuilding(caster)
 end
 
 

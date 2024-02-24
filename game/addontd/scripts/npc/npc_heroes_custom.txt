@@ -6,7 +6,7 @@
 	        "Ability1"  "fire_tower"
 	        "Ability2"  "water_tower"
 	        "Ability3"  ""
-	        "Ability6"  ""
+	        "Ability6"  "gold_tower"
 	        "AttributeBaseStrength"		"0"
 		"AttributeStrengthGain"		"0"
 		"AttributeBaseIntelligence"		"0"

@@ -1,0 +1,106 @@
+"DOTAAbilities"
+{
+    "fire_tower"
+    {
+        "UnitName"						"fire_tower"	//Юнит которого создаёт способность
+		"BaseClass"             		"ability_datadriven"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
+		"PlayerCanControl"				"1"		//Позволяет управлять зданием
+		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
+
+		"AbilityCastRange"				"200"
+		"AbilityGoldCost"				"125"	
+		"AbilityCooldown"				"0"
+        "OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+    }
+    "water_tower"
+    {
+        "UnitName"						"water_tower"	//Юнит которого создаёт способность
+		"BaseClass"             		"ability_datadriven"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
+		"PlayerCanControl"				"1"		//Позволяет управлять зданием
+		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
+
+		"AbilityCastRange"				"200"
+		"AbilityGoldCost"				"125"	
+		"AbilityCooldown"				"0"
+        "OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+    }
+	"gold_tower"
+	{
+		"UnitName"						"gold_tower"
+		"BaseClass"             		"ability_datadriven"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
+		"PlayerCanControl"				"1"		//Позволяет управлять зданием
+		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
+
+		"AbilityCastRange"				"200"
+		"AbilityGoldCost"				"50"	
+		"AbilityCooldown"				"0"
+        "OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+		
+	}
+	"GoldMine"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile"   "abilities/towers/GoldMine"
+		"MaxLevel"  "4"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCooldown"   			"9 8 7 6"
+		"AbilityValues"
+		{
+			"GoldPerSecond"   				"3 5 7 9"
+		}
+		
+	}
+	"building_upgrade"
+	{
+		"BaseClass"             		"ability_lua"
+		"UnitName"						""
+		"ScriptFile" 					"upgrades/building_upgrade"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
+		"PlayerCanControl"				"1"		//Позволяет управлять зданием
+		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
+
+		"AbilityCastRange"				"200"
+		"AbilityGoldCost"				"0"	
+		"AbilityCooldown"				"0"
+        
+		
+	}
+	
+    
+}

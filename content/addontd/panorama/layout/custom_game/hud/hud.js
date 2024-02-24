@@ -1,5 +1,6 @@
 var goldtext = $("#GoldLabel");
 var goldIcon = $("#GoldIcon");
+var CountCreep = $("#CountCreep");
 
 function updateGold() {
     if (Players.GetGold(Players.GetLocalPlayer()) >= 1000) {
@@ -25,3 +26,34 @@ function updateGold() {
 
 // Запускаем обновление золота
 updateGold();
+
+
+
+function update_creep_count(event) {
+    if (event.count) {
+        CountCreep.style.visibility = "visible";
+        CountCreep.text = event.count
+    } else {
+        var NewCount = parseInt(CountCreep.text) - 1
+        if (NewCount <= 0 ) {
+            CountCreep.style.visibility = "collapse";
+        }
+        CountCreep.text = NewCount
+    }
+    
+}
+function EndCreepCount(event) {
+    CountCreep.style.visibility = "collapse";
+    
+}
+
+GameEvents.Subscribe( "UpdateCreepCount", update_creep_count);
+
+GameEvents.Subscribe( "EndCreepCount", EndCreepCount);
+
+
+
+
+
+
+
