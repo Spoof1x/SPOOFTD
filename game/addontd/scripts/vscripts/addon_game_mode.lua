@@ -1,6 +1,7 @@
 
 
 require("libraries/buildinghelper")
+require("libraries/pathfix")
 require("waves")
 _G.killscreeps = {}
 _G.CreepCounter = {}
@@ -14,6 +15,7 @@ _G.TeamNumber = {
 	custom1 = "6",
 	custom2 = "7",
 }
+_G.AliveTeams = {}
 _G.round = 1
 
 xpTable = {
@@ -65,22 +67,26 @@ function Game:OnUnitKilled(event)
 	if unit.teamnumber then
 		_G.killscreeps[unit.teamnumber] = _G.killscreeps[unit.teamnumber] + 1
 		_G.CreepCounter[unit.teamnumber] = _G.CreepCounter[unit.teamnumber] - 1
+		CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "UpdateCreepCount", {
+			count = _G.CreepCounter[unit.teamnumber],
+		})
 		if _G.CreepCounter[unit.teamnumber]  == 0 then
 			_G.Teams[unit.teamnumber] = true
 			CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "EndCreepCount", {})
 		end
-		CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "UpdateCreepCount", {})
+		Game:CheckTeams()
 
 	end
 	if unit.builder then
 		local id = unit:GetPlayerID()
 		_G.Players[id] = nil 
+		_G.AliveTeams[unit:GetTeamNumber()] = false
 		_G.Teams[unit:GetTeamNumber()] = false
 		_G.Cplayers = _G.Cplayers - 1
-		
+		Game:CheckTeamsOnWin()
         unit:SetTimeUntilRespawn(9999)
         unit:SetBuybackCooldownTime(99999)
-
+		
 	end
 	
 end
@@ -99,6 +105,7 @@ function Game:OnNPCSpawned(keys)
 		local id = npc:GetPlayerID()
 		npc.builder = true
 		_G.Players[id] = npc
+		_G.AliveTeams[npc:GetTeamNumber()] = true
 		_G.Teams[npc:GetTeamNumber()] = false
 		_G.killscreeps[npc:GetTeamNumber()] = 0
 		_G.Cplayers = _G.Cplayers + 1
@@ -108,7 +115,7 @@ end
 
 function Game:OnThink()
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		Game:CheckTeams()
+		
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
 		return nil
 	end
@@ -116,8 +123,7 @@ function Game:OnThink()
 end
 
 function Game:CheckTeams()
-    Timers:CreateTimer(1, function ()
-		
+
         local allTeamsReady = true
 
 		for k, team in pairs(_G.Teams) do
@@ -134,6 +140,44 @@ function Game:CheckTeams()
             WaveClass:NextWave()
         else
         end
-        return 0.5
-    end)
+end
+
+function Game:CheckTeamsOnWin()
+	if _G.gamemode == "Solo" then
+			GameRules:SetGameWinner(DOTA_TEAM_NEUTRALS)
+		elseif _G.gamemode == "Duo" then
+            for team, isAlive in pairs(_G.AliveTeams) do
+                if isAlive then
+                    GameRules:SetGameWinner(team)
+                end
+            end
+        elseif _G.gamemode == "Trio" then
+			alives = 0
+			for team, isAlive in pairs(_G.AliveTeams) do
+                if isAlive then
+                    alives = alives + 1
+                end
+            end
+			if alives == 1 then
+				for team, isAlive in pairs(_G.AliveTeams) do
+					if isAlive then
+						GameRules:SetGameWinner(team)
+					end
+				end
+			end
+		elseif _G.gamemode == "All" then
+			alives = 0
+			for team, isAlive in pairs(_G.AliveTeams) do
+                if isAlive then
+                    alives = alives + 1
+                end
+            end
+			if alives == 1 then
+				for team, isAlive in pairs(_G.AliveTeams) do
+					if isAlive then
+						GameRules:SetGameWinner(team)
+					end
+				end
+			end
+        end
 end

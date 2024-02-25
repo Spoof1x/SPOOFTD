@@ -22,15 +22,21 @@
 		"gold_tower_upgrade1"  "Башня золото 2 уровня"
 		"gold_tower_upgrade2"  "Башня золото 3 уровня"
 		"gold_tower_upgrade3"  "Башня золото 4 уровня"
+		"DOTA_Tooltip_ability_gold_tower_Description"  "Создает Золотую Башню первого уровня. Золотая башня приносит золота в зависимости от уровня башни"
+		"DOTA_Tooltip_ability_gold_tower"  "Золотая Башня"
 
 
 		// water tower
 
 		"water_tower"  "Водная Башня"
+		"DOTA_Tooltip_ability_water_tower_Description"  "Создает Водную Башню первого уровня"
+		"DOTA_Tooltip_ability_water_tower"  "Водная Башня"
 
 		// fire tower
 
 		"fire_tower"  "Огненная Башня"
+		"DOTA_Tooltip_ability_fire_tower_Description"  "Создает Огненную Башню первого уровня"
+		"DOTA_Tooltip_ability_fire_tower"  "Огненная Башня"
 
 
 
@@ -57,6 +63,15 @@
 		"DOTA_Tooltip_ability_GoldMine_Description"  "Каждые несколько секунд дает золото, зависит от уровня тавера"
 		"DOTA_Tooltip_ability_GoldMine_GoldPerSecond" "Золото:"
 
+
+		// others
+		"DOTA_Tooltip_ability_destroyer" "Продажа Башни"
+		"DOTA_Tooltip_ability_destroyer_Description"  "Продает Башню за 40-50% стоимости"
+
+
+		// creeps
+		"npc_dota_neutral_kobold"   "Человечек"
+		"npc_dota_creep_goodguys_melee"  "Печенька"
 
 	}
 }

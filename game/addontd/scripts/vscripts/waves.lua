@@ -6,6 +6,13 @@ _G.spawners = {
    "path100",
 
 }
+_G.spawnersNames = {
+    "path10",
+    "path50",
+    "path150",
+    "path100",
+ 
+ }
 _G.allcreeps = {
     
     {
@@ -69,33 +76,16 @@ function WaveClass:Init()
 
 
 
-
-
-
-
-
-
-
-
-
-    local countplayers = _G.Cplayers
     WaveClass:StartGameTimer()
+
     for i=1 ,4 do
         _G.spawners[i] = Entities:FindByName(nil, _G.spawners[i])
     end
-    if countplayers == 1 then 
-        _G.gamemode = "Solo"
-    end
-    if countplayers == 2 then 
-        _G.gamemode = "Duo"
-    end
-    if countplayers == 3 then 
-        _G.gamemode = "Trio"
-    end
-    if countplayers == 4 then 
-        _G.gamemode = "All"
-    end
-    
+
+
+
+
+
 end
 
 function WaveClass:StartGameTimer()
@@ -104,6 +94,19 @@ function WaveClass:StartGameTimer()
         if secunds == 0 then 
             CustomGameEventManager:Send_ServerToAllClients("CloseStartGameTimer", {})
             WaveClass:StartRound()
+            local countplayers = _G.Cplayers
+            if countplayers == 1 then 
+                _G.gamemode = "Solo"
+            end
+            if countplayers == 2 then 
+                _G.gamemode = "Duo"
+            end
+            if countplayers == 3 then 
+                _G.gamemode = "Trio"
+            end
+            if countplayers == 4 then 
+                _G.gamemode = "All"
+            end
         end
         CustomGameEventManager:Send_ServerToAllClients("UpdateStartGameTimer", {sec = secunds})
         secunds = secunds - 1
@@ -116,7 +119,12 @@ end
 
 function WaveClass:StartRound()
     print("ROUND".. _G.round)
-
+    CustomGameEventManager:Send_ServerToAllClients("UpdateCreepCount", {
+        round = _G.round, 
+        maxcount = _G.allcreeps[_G.round].count, 
+        count = _G.allcreeps[_G.round].count,
+        name = _G.allcreeps[_G.round].name 
+    })
     local countplayers = _G.Cplayers
     if countplayers == 1 then 
         WaveClass:StartWaveSolo()
@@ -147,14 +155,19 @@ function WaveClass:StartWaveSolo()
 
     _G.CreepCounter[teamNumber] = count
     local spawner
+    local spawnersNames
     if teamNumber == 2 then
         spawner = _G.spawners[1]
+        spawnersNames = _G.spawnersNames[1]
     elseif teamNumber == 3 then
         spawner = _G.spawners[4]
+        spawnersNames = _G.spawnersNames[4]
     elseif teamNumber == 6 then
         spawner = _G.spawners[2]
+        spawnersNames = _G.spawnersNames[2]
     elseif teamNumber == 7 then
         spawner = _G.spawners[3]
+        spawnersNames = _G.spawnersNames[3]
     end
     Timers:CreateTimer(0.5 , function ()
         if count == _G.allcreeps[_G.round].count then
@@ -166,7 +179,7 @@ function WaveClass:StartWaveSolo()
         unit.teamnumber = teamNumber
         unit:AddNewModifier(unit, nil, "modifier_nocollision", {})
         unit.unitname =  _G.allcreeps[_G.round].name
-        unit:SetInitialGoalEntity(spawner)
+        unit:SetInitialWaypoint(spawnersNames)
         if count == 0 then
             return 
         end
@@ -190,24 +203,36 @@ function WaveClass:StartWaveDuo()
     
     
     local teamNumberPlayer1, teamNumberPlayer2 = teams[1] , teams[2]
+    local spawnersNames1
     if teamNumberPlayer1 == 2 then
         spawner1 = _G.spawners[1]
+        spawnersNames1 = _G.spawnersNames[1]
     elseif teamNumberPlayer1 == 3 then
         spawner1 = _G.spawners[4]
+        spawnersNames1 = _G.spawnersNames[4]
     elseif teamNumberPlayer1 == 6 then
         spawner1 = _G.spawners[2]
+        spawnersNames1 = _G.spawnersNames[2]
     elseif teamNumberPlayer1 == 7 then
         spawner1 = _G.spawners[3]
+        spawnersNames1 = _G.spawnersNames[3]
     end
+
+    local spawnersNames2
     if teamNumberPlayer2 == 2 then
         spawner2 = _G.spawners[1]
+        spawnersNames2 = _G.spawnersNames[1]
     elseif teamNumberPlayer2 == 3 then
         spawner2 = _G.spawners[4]
+        spawnersNames2 = _G.spawnersNames[4]
     elseif teamNumberPlayer2 == 6 then
         spawner2 = _G.spawners[2]
+        spawnersNames2 = _G.spawnersNames[2]
     elseif teamNumberPlayer2 == 7 then
         spawner2 = _G.spawners[3]
+        spawnersNames2 = _G.spawnersNames[3]
     end
+
     count1 = _G.allcreeps[_G.round].count
     count2 = _G.allcreeps[_G.round].count
     _G.CreepCounter[teamNumberPlayer1] = count1
@@ -227,13 +252,13 @@ function WaveClass:StartWaveDuo()
         unit1.teamnumber = teamNumberPlayer1
         unit1:AddNewModifier(unit1, nil, "modifier_nocollision", {})
         unit1.unitname =  _G.allcreeps[_G.round].name
-        unit1:SetInitialGoalEntity(spawner1)
+        unit1:SetInitialWaypoint(spawnersNames1)
 
         local unit2 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner2:GetAbsOrigin(), true, nil,nil, 4) 
         unit2.teamnumber = teamNumberPlayer2
         unit2:AddNewModifier(unit2, nil, "modifier_nocollision", {})
         unit2.unitname =  _G.allcreeps[_G.round].name
-        unit2:SetInitialGoalEntity(spawner2)
+        unit2:SetInitialWaypoint(spawnersNames2)
 
         if count1 == 0 then
             return 
@@ -255,35 +280,51 @@ function WaveClass:StartWaveTrio()
     end
     local teamNumberPlayer1, teamNumberPlayer2,teamNumberPlayer3 = teams[1] , teams[2], teams[3]
     local spawner1 
-    local spawner2
-    local spawner3
+    local spawnersNames1
     if teamNumberPlayer1 == 2 then
         spawner1 = _G.spawners[1]
+        spawnersNames1 = _G.spawnersNames[1]
     elseif teamNumberPlayer1 == 3 then
         spawner1 = _G.spawners[4]
+        spawnersNames1 = _G.spawnersNames[4]
     elseif teamNumberPlayer1 == 6 then
         spawner1 = _G.spawners[2]
+        spawnersNames1 = _G.spawnersNames[2]
     elseif teamNumberPlayer1 == 7 then
         spawner1 = _G.spawners[3]
+        spawnersNames1 = _G.spawnersNames[3]
     end
-
+    local spawner2
+    local spawnersNames2
     if teamNumberPlayer2 == 2 then
         spawner2 = _G.spawners[1]
+        spawnersNames2 = _G.spawnersNames[1]
     elseif teamNumberPlayer2 == 3 then
         spawner2 = _G.spawners[4]
+        spawnersNames2 = _G.spawnersNames[4]
     elseif teamNumberPlayer2 == 6 then
         spawner2 = _G.spawners[2]
+        spawnersNames2 = _G.spawnersNames[2]
     elseif teamNumberPlayer2 == 7 then
         spawner2 = _G.spawners[3]
+        spawnersNames2 = _G.spawnersNames[3]
     end
+
+
+    local spawner3
+    local spawnersNames3
     if teamNumberPlayer3 == 2 then
         spawner3 = _G.spawners[1]
+        spawnersNames3 = _G.spawnersNames[1]
     elseif teamNumberPlayer3 == 3 then
         spawner3 = _G.spawners[4]
+        spawnersNames3 = _G.spawnersNames[4]
     elseif teamNumberPlayer3 == 6 then
         spawner3 = _G.spawners[2]
+        spawnersNames3 = _G.spawnersNames[2]
     elseif teamNumberPlayer3 == 7 then
         spawner3 = _G.spawners[3]
+        spawnersNames3 = _G.spawnersNames[3]
     end
     
     
@@ -316,7 +357,7 @@ function WaveClass:StartWaveTrio()
         
         unit1:AddNewModifier(unit1, nil, "modifier_nocollision", {})
         unit1.unitname =  _G.allcreeps[_G.round].name
-        unit1:SetInitialGoalEntity(spawner1)
+        unit1:SetInitialWaypoint(spawnersNames1)
 
         local unit2 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner2:GetAbsOrigin(), true, nil,nil, 4) 
         
@@ -324,7 +365,7 @@ function WaveClass:StartWaveTrio()
         
         unit2:AddNewModifier(unit2, nil, "modifier_nocollision", {})
         unit2.unitname =  _G.allcreeps[_G.round].name
-        unit2:SetInitialGoalEntity(spawner2)
+        unit1:SetInitialWaypoint(spawnersNames2)
 
         local unit3 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner3:GetAbsOrigin(), true, nil,nil, 4) 
         
@@ -332,7 +373,7 @@ function WaveClass:StartWaveTrio()
 
         unit3:AddNewModifier(unit3, nil, "modifier_nocollision", {})
         unit3.unitname =  _G.allcreeps[_G.round].name
-        unit3:SetInitialGoalEntity(spawner3)
+        unit1:SetInitialWaypoint(spawnersNames3)
 
         if count1 == 0 then
             return 
@@ -348,50 +389,72 @@ function WaveClass:SpawnAllCreeps()
     
     local teamNumberPlayer1, teamNumberPlayer2, teamNumberPlayer3, teamNumberPlayer4 = _G.Players[0]:GetTeamNumber() , _G.Players[1]:GetTeamNumber() , _G.Players[2]:GetTeamNumber() , _G.Players[3]:GetTeamNumber() 
     
-    local spawner1 
-    local spawner2
-    local spawner3
-    local spawner4
+    
+
+    local spawner1
+    local spawnersNames1
     if teamNumberPlayer1 == 2 then
         spawner1 = _G.spawners[1]
+        spawnersNames1 = _G.spawnersNames[1]
     elseif teamNumberPlayer1 == 3 then
         spawner1 = _G.spawners[4]
+        spawnersNames1 = _G.spawnersNames[4]
     elseif teamNumberPlayer1 == 6 then
         spawner1 = _G.spawners[2]
+        spawnersNames1 = _G.spawnersNames[2]
     elseif teamNumberPlayer1 == 7 then
         spawner1 = _G.spawners[3]
-    end
-
-    if teamNumberPlayer2 == 2 then
-        spawner2 = _G.spawners[1]
-    elseif teamNumberPlayer2 == 3 then
-        spawner2 = _G.spawners[4]
-    elseif teamNumberPlayer2 == 6 then
-        spawner2 = _G.spawners[2]
-    elseif teamNumberPlayer2 == 7 then
-        spawner2 = _G.spawners[3]
-    end
-
-    if teamNumberPlayer3 == 2 then
-        spawner3 = _G.spawners[1]
-    elseif teamNumberPlayer3 == 3 then
-        spawner3 = _G.spawners[4]
-    elseif teamNumberPlayer3 == 6 then
-        spawner3 = _G.spawners[2]
-    elseif teamNumberPlayer3 == 7 then
-        spawner3 = _G.spawners[3]
-    end
-
-    if teamNumberPlayer4 == 2 then
-        spawner4 = _G.spawners[1]
-    elseif teamNumberPlayer4 == 3 then
-        spawner4 = _G.spawners[4]
-    elseif teamNumberPlayer4 == 6 then
-        spawner4 = _G.spawners[2]
-    elseif teamNumberPlayer4 == 7 then
-        spawner4 = _G.spawners[3]
+        spawnersNames1 = _G.spawnersNames[3]
     end
     
+
+    local spawner2
+    local spawnersNames2
+    if teamNumberPlayer2 == 2 then
+        spawner2 = _G.spawners[1]
+        spawnersNames2 = _G.spawnersNames[1]
+    elseif teamNumberPlayer2 == 3 then
+        spawner2 = _G.spawners[4]
+        spawnersNames2 = _G.spawnersNames[4]
+    elseif teamNumberPlayer2 == 6 then
+        spawner2 = _G.spawners[2]
+        spawnersNames2 = _G.spawnersNames[2]
+    elseif teamNumberPlayer2 == 7 then
+        spawner2 = _G.spawners[3]
+        spawnersNames2 = _G.spawnersNames[3]
+    end
+
+    local spawner3
+    local spawnersNames3
+    if teamNumberPlayer3 == 2 then
+        spawner3 = _G.spawners[1]
+        spawnersNames3 = _G.spawnersNames[1]
+    elseif teamNumberPlayer3 == 3 then
+        spawner3 = _G.spawners[4]
+        spawnersNames3 = _G.spawnersNames[4]
+    elseif teamNumberPlayer3 == 6 then
+        spawner3 = _G.spawners[2]
+        spawnersNames3 = _G.spawnersNames[2]
+    elseif teamNumberPlayer3 == 7 then
+        spawner3 = _G.spawners[3]
+        spawnersNames3 = _G.spawnersNames[3]
+    end
+
+    local spawner4
+    local spawnersNames4
+    if teamNumberPlayer4 == 2 then
+        spawner4 = _G.spawners[1]
+        spawnersNames4 = _G.spawnersNames[1]
+    elseif teamNumberPlayer4 == 3 then
+        spawner4 = _G.spawners[4]
+        spawnersNames4 = _G.spawnersNames[4]
+    elseif teamNumberPlayer4 == 6 then
+        spawner4 = _G.spawners[2]
+        spawnersNames4 = _G.spawnersNames[2]
+    elseif teamNumberPlayer4 == 7 then
+        spawner4 = _G.spawners[3]
+        spawnersNames4 = _G.spawnersNames[3]
+    end
     
     count1 = _G.allcreeps[_G.round].count
     count2 = _G.allcreeps[_G.round].count
@@ -427,25 +490,25 @@ function WaveClass:SpawnAllCreeps()
 
         unit1:AddNewModifier(unit1, nil, "modifier_nocollision", {})
         unit1.unitname =  _G.allcreeps[_G.round].name
-        unit1:SetInitialGoalEntity(spawner1)
+        unit1:SetInitialWaypoint(spawnersNames1)
 
         local unit2 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner2:GetAbsOrigin(), true, nil,nil, 4) 
         unit2.teamnumber = teamNumberPlayer2
         unit2:AddNewModifier(unit2, nil, "modifier_nocollision", {})
         unit2.unitname =  _G.allcreeps[_G.round].name
-        unit2:SetInitialGoalEntity(spawner2)
+        unit2:SetInitialWaypoint(spawnersNames2)
 
         local unit3 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner3:GetAbsOrigin(), true, nil,nil, 4) 
         unit3.teamnumber = teamNumberPlayer3
         unit3:AddNewModifier(unit3, nil, "modifier_nocollision", {})
         unit3.unitname =  _G.allcreeps[_G.round].name
-        unit3:SetInitialGoalEntity(spawner3)
+        unit3:SetInitialWaypoint(spawnersNames3)
 
         local unit4 = CreateUnitByName(_G.allcreeps[_G.round].name, spawner4:GetAbsOrigin(), true, nil,nil, 4) 
         unit4.teamnumber = teamNumberPlayer4
         unit4:AddNewModifier(unit4, nil, "modifier_nocollision", {})
         unit4.unitname =  _G.allcreeps[_G.round].name
-        unit4:SetInitialGoalEntity(spawner4)
+        unit4:SetInitialWaypoint(spawnersNames4)
 
         if count1 == 0 then
             return 

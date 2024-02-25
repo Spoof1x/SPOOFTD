@@ -4,6 +4,7 @@
     {
         "UnitName"						"fire_tower"	//Юнит которого создаёт способность
 		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"  "towers/fire_tower/fire_tower"
 		"MaxLevel" 						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCastPoint"				"0"
@@ -27,6 +28,7 @@
     {
         "UnitName"						"water_tower"	//Юнит которого создаёт способность
 		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"  "towers/water_tower/water_tower"
 		"MaxLevel" 						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCastPoint"				"0"
@@ -50,6 +52,32 @@
 	{
 		"UnitName"						"gold_tower"
 		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"  "towers/gold_tower/gold_tower"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityCastPoint"				"0"
+		"Building"						"1" 	//Нужно ставить, если это абилка на строительство
+		"PlayerCanControl"				"1"		//Позволяет управлять зданием
+		"Scale"							"1" 	//Если 1 то размер постепенно увеличивается 
+
+		"AbilityCastRange"				"200"
+		"AbilityGoldCost"				"50"	
+		"AbilityCooldown"				"0"
+        "OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"builder.lua"
+				"Function"		"Build"
+			}
+		}
+		
+	}
+	"repair_tower"
+	{
+		"UnitName"						"repair_tower"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"  ""
 		"MaxLevel" 						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCastPoint"				"0"

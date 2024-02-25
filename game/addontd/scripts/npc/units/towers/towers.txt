@@ -376,6 +376,68 @@
         "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
         
     }
+    "repair_tower"
+    {
+        "BaseClass"		            "npc_dota_creature"
+        "Model"                     "models/heroes/tiny_03/tiny03_deathsim.vmdl"
+        
+        "ModelScale" 				"0.4"
+        "SelectOnSpawn"				"0"
+        "AutoAttacksByDefault"		"1"
+        "Level"                     "1"
+        "sell"                      "25"     //Цена продажи
+        "BuildTime"                 "5"     //Время строительства
+
+        "Ability1"					"destroyer"
+        "Ability2"                  ""	
+        "Ability3"					""
+			
+    
+        "ArmorPhysical"             "0"
+        "MagicalResistance"         "0"
+
+        "StatusHealth"              "100"    //Минимум 10 здоровья
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0"
+
+        "AttackCapabilities"		""
+		"BaseAttackSpeed"		    "100"
+		"AttackDamageMin"			"120"		
+		"AttackDamageMax"			"150"			
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"	
+		"AttackAnimationPoint"		"0.4"			
+		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
+		"ProjectileSpeed"			"750"
+
+        // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		// "AttributeBaseStrength"		"0"			
+		// "AttributeStrengthGain"		"0"			
+		// "AttributeBaseIntelligence"	"0"			
+		// "AttributeIntelligenceGain"	"0"		
+		// "AttributeBaseAgility"		"0"			
+		// "AttributeAgilityGain"		"0"		
+
+        "VisionDaytimeRange"		"500"		
+		"VisionNighttimeRange"		"500"		
+
+        "BoundsHullName"			"DOTA_HULL_SIZE_HERO"   
+		"RingRadius"				"24"       
+		"HealthBarOffset"			"170"
+
+        "MovementTurnRate"          "1.0"
+
+        "UseNeutralCreepBehavior"   "0"     //Должно быть 0
+        "HasInventory"              "0"
+
+        "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
+        "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
+        // "UpgradeCost"  "25"
+        // "Upgrade"                   "gold_tower_upgrade1"
+
+
+    }
     
     
 }

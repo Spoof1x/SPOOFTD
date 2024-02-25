@@ -14,6 +14,21 @@
         "MovementCapabilities"        "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"                "250"        
         "MovementTurnRate"            "0.5"
+    } 
+    "npc_dota_creep_goodguys_melee"
+    {
+        "Model"  "models/ginger/ginger.vmdl"
+        "ModelScale" "0.5"
+        "UseNeutralCreepBehavior"   "0"
+        "AttackCapabilities"		""
+        "DisableWearables" "1"
+        "damage"   "2"
+        "ArmorPhysical"                "0"        
+        "MagicalResistance"                "0"   
+        "MovementCapabilities"        "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"                "270"        
+        "MovementTurnRate"            "0.5"
+
     }
     
 }

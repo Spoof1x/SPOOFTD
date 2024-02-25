@@ -4,6 +4,7 @@
     </scripts>
     <styles>
             <include src="file://{resources}/layout/custom_game/hud/hud.css" />
+            
     </styles>
 
     <Panel style="height:100%; width:100%;" hittest="false">
@@ -12,14 +13,32 @@
 
 
             <Panel id="wave" class="wave" hittest="false" style="height:100%; width:100%;">
-                <Label id="CountCreep" class="CountCreep" text="0" />
+                
+                <Image id="bookimg" class="bookimg" src="file://{images}/custom_game/rounds/handbook_png.png" style="margin-top:136px; margin-left:50px;"/>
+                <Panel id="bg_wave" class="bg_wave">
+                    
+                    <Image id="waveimg" class="waveimg" src="file://{images}/custom_game/rounds/item_r_png.png" style="height:45%; width:50%;"/>  
+                    <Label id="CountCreep" class="CountCreep" text="10/10" />
+                    <Label id="NameCreep" class="NameCreep" text="Мечники" />
+                    <Label id="CountRound" class="CountRound" text="РАУНД 1" />
+                </Panel>
+                
             </Panel>
+            <Panel id="closeRound" class="closeRound" style="height:100%; width:100%;" hittest="false">
+                <Label id="WinWave" class="WinWave" text="Вы успешно завершили раунд!" />
+            </Panel>
+
+
             <Panel id="Gold" class="Gold" style="height:100%; width:100%;" hittest="false">
                 <Label id="GoldLabel" class="GoldLabel" text="600"/>
                 <Panel id="GoldIcon" hittest="false">
                     
                 </Panel>
 
+            </Panel>
+
+           <Panel id="HeroesSelected" class="HeroesSelected">
+                
             </Panel>
         </Panel>
     </Panel>

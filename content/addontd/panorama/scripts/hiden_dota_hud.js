@@ -24,6 +24,7 @@ dotaHud.FindChildTraverse('ShopCourierControls').style.visibility = 'collapse'
 dotaHud.FindChildTraverse('QuickBuyRows').style.visibility = 'collapse'
 dotaHud.FindChildTraverse('shop').style.visibility = 'collapse'
 dotaHud.FindChildTraverse('stash').style.visibility = 'collapse'
+dotaHud.FindChildTraverse('shop_launcher_bg').style.visibility = 'collapse'
 
 // Справа от инвенторя
 dotaHud.FindChildTraverse('right_flare').style.visibility = 'collapse'
@@ -31,3 +32,8 @@ dotaHud.FindChildTraverse('inventory_composition_layer_container').style.visibil
 
 // Глиф
 dotaHud.FindChildTraverse('GlyphScanContainer').style.visibility = 'collapse'
+
+
+// dota hud
+
+dotaHud.FindChildTraverse('topbar').style.visibility = 'collapse'

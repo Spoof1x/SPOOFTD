@@ -18,6 +18,9 @@
     
     
 }
+#wave {
+    visibility: collapse;
+}
 #GoldIcon {
     
     
@@ -42,9 +45,53 @@
 }
 
 
-#CountCreep {
-    font-size: 50px;
-    color: darkorange;
-    horizontal-align: center;
-    vertical-align: center;
+
+#bg_wave {
+    height: 200px;
+    width: 400px;
+    margin-top: 200px;
 }
+
+
+#CountCreep, #NameCreep, #CountRound {
+    color: #ffffff; /* Цвет текста */
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет фона с прозрачностью */
+    padding: 5px; /* Внутренний отступ */
+    border-radius: 5px; /* Скругление углов */
+}
+
+#CountCreep {
+    font-size: 20px;
+    margin-top:56px; /* Отступ снизу */
+    margin-left: 120px; /* Отступ слева */
+}
+
+#NameCreep {
+    font-size: 20px;
+    margin-top:56px; /* Отступ снизу */
+    margin-right: 20px; /* Отступ справа */
+}
+
+#CountRound {
+    font-size: 40px;
+    margin-top: 0px; /* Отступ сверху */
+    margin-right: 20px; /* Отступ справа */
+}
+
+
+
+
+
+.HeroesContainer {
+    margin-left: 300px;
+}
+
+#WinWave {
+    visibility: collapse;
+    font-size: 50px;
+    color: blueviolet;
+    vertical-align: center;
+    horizontal-align: center;
+    margin-bottom: 700px;
+}
+
