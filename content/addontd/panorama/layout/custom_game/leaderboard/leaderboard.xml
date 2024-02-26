@@ -1,0 +1,24 @@
+<root>
+   <scripts>
+            <include src="file://{resources}/layout/custom_game/leaderboard/leaderboard.js" />
+    </scripts>
+    <styles>
+            <include src="file://{resources}/layout/custom_game/leaderboard/leaderboard.css" />
+            <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+    </styles>
+    <Panel hittest="false" class="Root">
+		<Button class="OpenUpgrades" onactivate="OpenUpgrades()" />
+		<Panel id="LeftContainer" hittest="false" hittestchildren="true">
+			<Panel id="LeftFirstChild" />
+			<Panel id="LeftSecondChild" />
+			<Panel id="LeftThirdChild" />
+		</Panel>
+		<Panel id="RightContainer" hittest="false" hittestchildren="true">
+			<Panel id="RightFirstChild" />
+		</Panel>
+		<Panel id="StatsContainer" hittest="false" hittestchildren="true">
+			<Panel id="RightSecondChild" />
+		</Panel>
+	</Panel>
+
+</root>

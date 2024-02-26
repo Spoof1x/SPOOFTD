@@ -5,8 +5,7 @@ function modifier_build:IsHidden() return true end
 
 function modifier_build:CheckState() 
     local state = {
-        [MODIFIER_STATE_ATTACK_IMMUNE] = true,
-        [MODIFIER_STATE_INVULNERABLE] = true,
+        -- [MODIFIER_STATE_ATTACK_IMMUNE] = true,
         
 
     }

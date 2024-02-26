@@ -1,97 +1,301 @@
-#GoldLabel {
-    color: #ffcc33;
-    opacity: 1; 
-    font-size: 34px;
-    font-weight: bold; 
-    text-align: right;
-    
-    
-    vertical-align:bottom;
-    margin-bottom: 260px;
-    margin-left: 95px;
-    min-width: 50px;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px 3.0 #00000066;
-    text-overflow: shrink;
-   
-    
-    
-    
-}
-#wave {
-    visibility: collapse;
-}
-#GoldIcon {
-    
-    
-    background-image: url( "s2r://panorama/images/hud/reborn/gold_small_psd.vtex");
-    background-size: 100% 100%;
-    width: 45px;
-    height: 45px;
-    vertical-align:bottom;
-    margin-bottom: 259px;
-    
-   
-}
-
-.left1 {
-    margin-left: 175px;
-}
-.left {
-    margin-left: 155px;
-}
-.left2 {
-    margin-left: 195px;
-}
 
 
 
-#bg_wave {
-    height: 200px;
-    width: 400px;
-    margin-top: 200px;
-}
-
-
-#CountCreep, #NameCreep, #CountRound {
-    color: #ffffff; /* Цвет текста */
-    background-color: rgba(0, 0, 0, 0.5); /* Цвет фона с прозрачностью */
-    padding: 5px; /* Внутренний отступ */
-    border-radius: 5px; /* Скругление углов */
-}
-
-#CountCreep {
-    font-size: 20px;
-    margin-top:56px; /* Отступ снизу */
-    margin-left: 120px; /* Отступ слева */
-}
-
-#NameCreep {
-    font-size: 20px;
-    margin-top:56px; /* Отступ снизу */
-    margin-right: 20px; /* Отступ справа */
-}
-
-#CountRound {
-    font-size: 40px;
-    margin-top: 0px; /* Отступ сверху */
-    margin-right: 20px; /* Отступ справа */
-}
-
-
-
-
-
-.HeroesContainer {
-    margin-left: 300px;
-}
-
-#WinWave {
-    visibility: collapse;
-    font-size: 50px;
-    color: blueviolet;
+.InfoRow{
+    transition-property: margin;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+       border-top: 2px solid darkgoldenrod;
+       border-bottom: 2px solid rgb(177, 150, 0);
+       border-right: 2px solid darkgoldenrod;
+       border-left: 2px solid rgb(177, 150, 0);
+       box-shadow: fill 0px 0px 15px 0px #000000a6;
+       transition-property: box-shadow, brightness;
+       transition-duration: 0.15s;
+       transition-timing-function: ease-in-out;
+    width: fill-parent-flow(1.0);
+    height: 300px;
+       padding: 10px;
+    padding-top: 0px;
+       vertical-align: bottom;
+       background-color: rgba(0, 0, 0, 0.918);
+       border-radius: 10px 0px 0px 0px;
+       margin-left: 1400px;
+       visibility: visible;
+  }
+    #stats {
+        horizontal-align: center;
+    }
+   .BottomContainer{
+       background-color: #00000036;
+       border-bottom: 1px solid darkgoldenrod;
+       border-top: 1px solid darkgoldenrod;
+       width: fill-parent-flow(1.0);
+       height: 70px;
+       padding: 10px;
+       flow-children: right;
+    margin-top: -20px;
+       vertical-align: bottom;
+   }
+  
+  
+   .BottomContainer > .BottomStatsContainer{
+    width: fill-parent-flow(0.5);
+       height: fill-parent-flow(1.0);
+       flow-children: down;
+   }
+  
+   .GoldContainer{
+    flow-children: right;
+    width: fit-children;
+    vertical-align: middle;
+    horizontal-align: left;
+       margin-left: 30px;
+    padding-right: 5px;
+   }
+  
+   .GoldIcon{
+    width: 34px;
+    height: 34px;
     vertical-align: center;
-    horizontal-align: center;
-    margin-bottom: 700px;
+   }
+  
+   #CurrentGoldText{
+    font-weight: bold;
+    color: #fc2;
+    vertical-align: center;
+    text-align: center;
+   }
+   #IncomeText,#TowersText{
+  
+    vertical-align: center;
+    margin-left: 60px;
+    font-size: 20px;
+   }
+   .TopContainer{
+       background-color: #00000000;
+       border-top: 1px solid #000000aa;
+       width: fill-parent-flow(1.0);
+       height: 200px;
+       padding: 10px;
+       flow-children: down;
+    max-height: fit-children;
+       horizontal-align: center;
+       vertical-align: top;
+    opacity: 1;
+       transition-property: height;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+   
+   }
+  
+   .TopContainer Label{
+    margin-bottom: 2px;
+    font-size: 20px;
+   }
+  
+   
+  
+  
+  
+   .PanelClass{
+       flow-children: right;
+  
+       width: 49%;
+       min-height: 64px;
+  
+       padding: 0px 12px;
+   }
+  
+  
+   .StatsIconsContainer{
+       flow-children: right-wrap;
+  
+       width: 100%;
+       height: 100%;
+  
+       margin-top: 6px;
+  
+       horizontal-align: right;
+       vertical-align: middle;
+   }
+   #CreepsHealthText{
+  
+       vertical-align: center;
+       horizontal-align: center;
+       text-overflow: shrink;
+   }
+   .IconClass{
+       width: 45px;
+       height: 45px;
+       border-radius: 10px;
+       horizontal-align: center;
+       vertical-align: middle;
+   }
+   .ShowAllStatsButton{
+       width: 180px;
+       height: 42px;
+       margin-left: 1700px;
+       vertical-align: bottom;
+       margin-bottom: 33px;
+       padding-top: 2px;
+       padding-left: 16px;
+       padding-right: 16px;
+       background-color: rgb(94, 80, 0);
+       transition-property: background-color, wash-color;
+       transition-delay: 0.0s;
+       transition-duration: 0.1s;
+       transition-timing-function: linear;
+       margin-right: 10px;
+       border-radius: 10px;
+       flow-children: down;
+   }
+   
+  
+  
+   Button:enabled:hover{
+       border: 1px solid rgba(41, 41, 41, 0.4);
+       background-color: rgba(46, 46, 46, 0.867);
+       wash-color: white;
+   }
+  
+   Button:active{
+       border: 1px solid #fff;
+       background-color: #000d;
+       wash-color: white;
+   }
+  
+  
+   Button > Label{
+       text-align: center;
+       horizontal-align: center;
+       vertical-align: middle;
+   }
+   
+
+   #firstColumn{
+       border-bottom: 1px solid darkgoldenrod;
+       border-right: 1px solid darkgoldenrod;
+   }
+  
+   #secondColumn{
+       border-bottom: 1px solid darkgoldenrod;
+   }
+  
+   #thirdColumn{
+       border-right: 1px solid darkgoldenrod;
+  }
+
+
+#text {
+    font-size: 15px;
 }
 
+
+.SpawnerRoot{
+    flow-children: right;
+    horizontal-align: center;
+    width: 300px;
+    height: fit-children;
+    transition-property: margin;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+       border-bottom: 1px solid darkgoldenrod;
+       border-right: 1px solid darkgoldenrod;
+       border-left: 1px solid darkgoldenrod;
+       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+       transition-property: box-shadow, brightness;
+       transition-duration: 0.15s;
+       transition-timing-function: ease-in-out;
+    padding: 5px;
+    background-color: rgb(0, 0, 0);
+       border-radius: 0px 0px 15px 15px;
+  }
+  
+   .Hidden{
+    opacity: 0;
+   }
+  
+   .VerticalFlow{
+    flow-children: down;
+   }
+  
+   .HorizontalFlow{
+    width: fill-parent-flow(1.0);
+    flow-children: right;
+   }
+  
+   .VerticalFlow{
+    width: fill-parent-flow(1.0);
+    flow-children: down;
+   }
+  
+   .FirstLineContainer{
+    margin-bottom: 5px;
+   }
+  
+   .WaveText{
+    horizontal-align: left;
+    color: gold;
+   }
+  
+   .GameTimerContainer{
+    flow-children: right;
+    horizontal-align: right;
+   }
+  
+   #GameTimerText{
+    margin-left: 5px;
+   }
+  
+   .SecondLineContainer{
+    max-height: 25px;
+    margin-bottom: 5px;
+   }
+  
+   .WaveTimerIcon{
+    width: 24px;
+    height: 24px;
+    vertical-align: center;
+    margin-right: 5px;
+   }
+  
+   .WaveTimerProgressBackground{
+       background-color: black;
+       width: fill-parent-flow(1.0);
+       height: fill-parent-flow(1.0);
+       box-shadow: #00000055 0px 0px 1px 2px;
+       border: 1px solid darkgoldenrod;
+   }
+  
+   #WaveTimerProgress{
+       width: 100% ;
+       height: fill-parent-flow(1.0);
+       background-color: red;
+   }
+   #WaveTimersValue{
+    horizontal-align: center;
+    vertical-align: center;
+    text-align: center;
+  
+    color: gold;
+   }
+   #GoldContainer{
+    width: fit-children;
+    horizontal-align: center;
+   }
+   #GoldContainer > Label{
+    font-size: 18px;
+    font-weight: bold;
+    color: #fc2;
+    vertical-align: center;
+    text-align: center;
+   }
+   #GoldContainer > .GoldIcon{
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+  }
+#CreepName {
+    horizontal-align: center;
+}

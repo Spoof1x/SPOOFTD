@@ -89,7 +89,7 @@ function Build( event )
         unit.original_attack = unit:GetAttackCapability()
         unit:SetAttackCapability(DOTA_UNIT_CAP_NO_ATTACK)
         unit:AddNewModifier(unit, nil, "modifier_building", {})
-        unit:AddNewModifier(unit, nil, "modifier_build", {})
+        
 
        
         unit.gold_cost = gold_cost
@@ -101,6 +101,10 @@ function Build( event )
 
         -- Remove invulnerability on npc_dota_building baseclass
         unit:RemoveModifierByName("modifier_invulnerable")
+        _G.towers[unit:GetTeamNumber()] = _G.towers[unit:GetTeamNumber()] + 1
+        CustomGameEventManager:Send_ServerToTeam(unit:GetTeamNumber(), "update_CountTowers", {
+			count  = _G.towers, 
+		})
     end)
 
     -- A building finished construction
@@ -115,6 +119,7 @@ function Build( event )
         end
         
         
+
         -- Give the unit their original attack capability
         unit:SetAttackCapability(unit.original_attack)
         unit:RemoveModifierByName("modifier_building")
@@ -158,6 +163,10 @@ function CancelBuilding( keys )
         BuildingHelper:ShowBuilder(builder)
     end
     UTIL_Remove(building)--This will call RemoveBuilding
+    _G.towers[hero:GetTeamNumber()] = _G.towers[hero:GetTeamNumber()] - 1
+        CustomGameEventManager:Send_ServerToTeam(hero:GetTeamNumber(), "update_CountTowers", {
+		count  = _G.towers, 
+	})
 end
                       
 -- Requires notifications library from bmddota/barebones

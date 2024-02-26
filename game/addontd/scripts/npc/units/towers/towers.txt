@@ -40,6 +40,7 @@
 		"AttackAnimationPoint"		"0.4"			
 		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" 
 		"ProjectileSpeed"			"1100"
+        "AttackRange"               "600"
 
         // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
 		// "AttributeBaseStrength"		"0"			
@@ -70,6 +71,7 @@
     "water_tower"
     {
         "BaseClass"		            "npc_dota_creature"
+        
         "Model"                     "models/heroes/morphling/morphling.vmdl"
         "Creature"
         {
@@ -106,6 +108,7 @@
 		"AttackAnimationPoint"		"0.4"			
 		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf" 
 		"ProjectileSpeed"			"950"
+        "AttackRange"               "600"
 
         // "AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
 		// "AttributeBaseStrength"		"0"			
@@ -389,7 +392,7 @@
         "BuildTime"                 "5"     //Время строительства
 
         "Ability1"					"destroyer"
-        "Ability2"                  ""	
+        "Ability2"                  "repair"	
         "Ability3"					""
 			
     

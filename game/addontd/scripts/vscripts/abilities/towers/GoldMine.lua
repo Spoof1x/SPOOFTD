@@ -3,7 +3,7 @@ LinkLuaModifier("modifier_GoldMine", "abilities/towers/GoldMine", LUA_MODIFIER_M
 GoldMine = {}
 
 function GoldMine:GetIntrinsicModifierName()
-    return "modifier_GoldMine"
+    return "modifier_GoldMine" 
 end
 
 

@@ -4,42 +4,67 @@
     </scripts>
     <styles>
             <include src="file://{resources}/layout/custom_game/hud/hud.css" />
-            
+            <include src="s2r://panorama/styles/dotastyles.vcss_c" />
     </styles>
 
     <Panel style="height:100%; width:100%;" hittest="false">
         <Panel id="main" class="main" style="height:100%; width:100%;" hittest="false">
-
-
-
-            <Panel id="wave" class="wave" hittest="false" style="height:100%; width:100%;">
-                
-                <Image id="bookimg" class="bookimg" src="file://{images}/custom_game/rounds/handbook_png.png" style="margin-top:136px; margin-left:50px;"/>
-                <Panel id="bg_wave" class="bg_wave">
-                    
-                    <Image id="waveimg" class="waveimg" src="file://{images}/custom_game/rounds/item_r_png.png" style="height:45%; width:50%;"/>  
-                    <Label id="CountCreep" class="CountCreep" text="10/10" />
-                    <Label id="NameCreep" class="NameCreep" text="Мечники" />
-                    <Label id="CountRound" class="CountRound" text="РАУНД 1" />
-                </Panel>
-                
-            </Panel>
-            <Panel id="closeRound" class="closeRound" style="height:100%; width:100%;" hittest="false">
-                <Label id="WinWave" class="WinWave" text="Вы успешно завершили раунд!" />
-            </Panel>
-
-
-            <Panel id="Gold" class="Gold" style="height:100%; width:100%;" hittest="false">
-                <Label id="GoldLabel" class="GoldLabel" text="600"/>
-                <Panel id="GoldIcon" hittest="false">
-                    
-                </Panel>
-
-            </Panel>
-
            <Panel id="HeroesSelected" class="HeroesSelected">
-                
+
             </Panel>
         </Panel>
-    </Panel>
+        <Panel class="InfoRow" id="InfoRow">
+            <Panel class="TopContainer" id="TopContainer">
+                <Label hittest="false" id="stats" text="Статистика" html="true" />
+                <Panel id="st1" class="StatsIconsContainer" >
+                    <Panel class="PanelClass" id="firstColumn">
+                        <Image class="IconClass" id="towers" onmouseover="TipsOver(&apos;TD_Towers&apos;,&apos;TowersText&apos;)" onmouseout="TipsOut()" src="file://{images}/statistics/towers_png.png" />
+                        <Label hittest="false" id="TowersText" class="ShowAllStatsOnly Last" html="true" text="0"/>
+                    </Panel>
+                    <Panel class="PanelClass" id="secondColumn">
+                        <Image class="IconClass" id="creep_hp" onmouseover="TipsOver(&apos;TD_CreepHP&apos;,&apos;creep_hp&apos;)" onmouseout="TipsOut()" src="file://{images}/statistics/creep_hp_png.png" />
+                        <Label id="CreepsHealthText" hittest="false" html="true" text="Creeps health: 100" />
+                    </Panel>
+                    <Panel class="PanelClass" id="thirdColumn">
+                        <Image class="IconClass" onmouseover="TipsOver(&apos;TD_PlayerIncome&apos;,&apos;IncomeText&apos;)" onmouseout="TipsOut()" src="file://{images}/statistics/income_png.png" />
+                        <Label id="IncomeText" hittest="false" html="true" />
+                    </Panel>
+                    
+                </Panel>
+            </Panel>
+            <Panel class="BottomContainer" id="BottomContainer">
+                <Panel class="BottomStatsContainer">
+                    <Panel class="GoldContainer">
+                        <Image class="GoldIcon" onmouseover="TipsOver(&apos;TD_Gold&apos;,&apos;CurrentGoldText&apos;)" onmouseout="TipsOut()" src="s2r://panorama/images/hud/reborn/gold_small_psd.vtex" />
+                        <Label hittest="false" id="CurrentGoldText" html="true" />
+                        
+                    </Panel>
+                </Panel>
+            </Panel>
+        </Panel>
+        <Button id="ShowAllStatsButton" class="ShowAllStatsButton" onactivate="SetExpanded()">
+                <Label id="text" text="#Show_Details" />
+        </Button>
+        <Panel hittest="false" class="SpawnerRoot">
+		<Panel class="VerticalFlow">
+			<Panel class="HorizontalFlow FirstLineContainer">
+				<Label hittest="false" class="WaveText" id="CurrentWaves" text="Раунд: 1" />
+				<Panel hittest="false" class="GameTimerContainer">
+					<Image class="GameTimerIcon" src="s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex" />
+					<Label id="GameTimerText" text="0:00" />
+				</Panel>
+			</Panel>
+			<Panel class="HorizontalFlow SecondLineContainer">
+				<Image class="WaveTimerIcon" src="s2r://panorama/images/hud/skull_stroke_png.vtex" />
+				<Panel class="WaveTimerProgressBackground">
+					<Panel id="WaveTimerProgress" />
+					<Label id="WaveTimersValue" text="15/15" />
+				</Panel>
+			</Panel>
+			<Label id="CreepName" class="CreepName" text="#npc_dota_neutral_kobold"/>
+			
+		</Panel>
+	</Panel>
+
+        </Panel>
 </root>

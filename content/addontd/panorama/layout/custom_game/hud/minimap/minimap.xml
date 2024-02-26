@@ -1,0 +1,13 @@
+<root>
+	<scripts>
+		<include src="file://{resources}/layout/custom_game/hud/minimap/minimap.js" />
+	</scripts>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="s2r://panorama/styles/hud/hud_reborn.vcss_c" />
+		<include src="file://{resources}/layout/custom_game/hud/minimap/minimap.css" />
+	</styles>
+	<Panel class="MinimapRoot">
+		<DOTAMinimap id="minimap" require-composition-layer="true" />
+	</Panel>
+</root>

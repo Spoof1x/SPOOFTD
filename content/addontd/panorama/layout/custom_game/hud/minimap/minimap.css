@@ -1,0 +1,17 @@
+.MinimapRoot{
+    width: fit-children;
+    height: fit-children;
+    vertical-align: bottom;
+    flow-children: right;
+}
+#minimap{
+    height: 350px;
+    width: 350px;
+    vertical-align: bottom;
+}
+
+
+
+
+
+

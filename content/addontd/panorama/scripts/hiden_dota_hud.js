@@ -37,3 +37,17 @@ dotaHud.FindChildTraverse('GlyphScanContainer').style.visibility = 'collapse'
 // dota hud
 
 dotaHud.FindChildTraverse('topbar').style.visibility = 'collapse'
+
+
+DOTA_HUD_ROOT = $.GetContextPanel().GetParent().GetParent().GetParent()
+HideDOTAMinimap()
+
+
+function HideDOTAMinimap() {
+    let dotaMinimap = DOTA_HUD_ROOT.FindChildTraverse("minimap_container")
+    if(dotaMinimap) {
+        dotaMinimap.style.visibility = "collapse";
+    } else {
+        $.Msg("Valve break something again. Can't find panel with id='minimap_container'")
+    }
+}

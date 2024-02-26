@@ -39,6 +39,10 @@
 		"DOTA_Tooltip_ability_fire_tower"  "Огненная Башня"
 
 
+		// repair tower
+		"repair_tower"  "Башня ремонта"
+		"DOTA_Tooltip_ability_repair_tower_Description"  "Создает Башню ремонта первого уровня"
+		"DOTA_Tooltip_ability_repair_tower"  "Башня ремонта"
 
 
 
@@ -56,8 +60,11 @@
 		"DOTA_Tooltip_ability_building_upgrade"  "Прокачка Башни"
 		"DOTA_Tooltip_ability_building_upgrade_Description" "Прокачивает определенную Башню на следующий уровень"
 
-
-
+		// repair
+		"DOTA_Tooltip_ability_repair"  "ПОЧИНКА"
+		"DOTA_Tooltip_ability_repair_Description"  "Каждые несколько секунд хилит поломонные Башни вокруг себя"
+		"DOTA_Tooltip_ability_GoldMine_GoldPerSecond" "Золото:"
+		
 		//  GoldMine
 		"DOTA_Tooltip_ability_GoldMine"  "ЗОЛОТО"
 		"DOTA_Tooltip_ability_GoldMine_Description"  "Каждые несколько секунд дает золото, зависит от уровня тавера"
@@ -72,6 +79,16 @@
 		// creeps
 		"npc_dota_neutral_kobold"   "Человечек"
 		"npc_dota_creep_goodguys_melee"  "Печенька"
+
+		// panorama
+
+		"Hide_Details" "Скрыть статистику"
+		"Show_Details" "Показать статистику"
+		"TD_CreepHP" "Здоровье крипов"
+		"TD_Towers" "Количество Башен"
+		"TD_PlayerIncome"  "Количество денег в 15 секунд"
+		"fixNewWave" "Подготовка к следующей волне"
+		"TD_Gold"  "Золото"
 
 	}
 }

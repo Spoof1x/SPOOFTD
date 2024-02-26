@@ -1,0 +1,88 @@
+.Root{
+    width: 100%;
+    height: 100%;
+}
+
+#LeftContainer{
+    horizontal-align: left;
+    vertical-align: bottom;
+    width: fit-children;
+    height: 100%;
+    flow-children: down;
+}
+
+.HUDFlipped #LeftContainer{
+    horizontal-align: right;
+    height: fill-parent-flow(1.0);
+}
+
+#RightContainer{
+    horizontal-align: right;
+    flow-children: down;
+    margin-top: 350px;
+    width: 520px;
+}
+
+.HUDFlipped #RightContainer{
+    horizontal-align: left;
+}
+#StatsContainer{
+    horizontal-align: right;
+    vertical-align: bottom;
+    flow-children: down;
+    width: 520px;
+    height: fit-children;
+}
+
+.HUDFlipped #StatsContainer{
+    horizontal-align: left;
+}
+
+.OpenUpgrades{
+    vertical-align: center;
+    horizontal-align: right;
+    width: 40px;
+    height: 80px;
+    background-image: url("s2r://panorama/images/kit/gui_close_menu_png.vtex");
+    background-size: 20px 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    pre-transform-rotate2d: 180deg;
+
+    visibility: visible;
+    margin-top: -150px;
+
+    border: 1px solid #bcd6;
+    background-color: #000d;
+    wash-color: white;
+
+    transition-property: border;
+    transition-delay: 0.0s;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+
+    border-radius: 0px 15px 15px 0px;
+}
+.OpenUpgrades:hover{
+    border: 1px solid darkgoldenrod;
+}
+
+@define TotalLength: 5s;
+@define TimingFunc: linear;
+@define IterationCount: 1;
+@keyframes 'x'{}
+
+.open_upgr_anim{
+ animation-name: open_upgr_anim;
+ animation-duration: .2s;
+ animation-timing-function: linear;
+}
+
+@keyframes 'open_upgr_anim'{
+ from{
+  transform: translate3d( 1000px, 0px, 0px);
+ }
+ to{
+  transform: translate3d( 0px, 0px, 0px);
+ }
+}

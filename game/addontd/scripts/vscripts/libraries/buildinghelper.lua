@@ -131,7 +131,7 @@ function BuildingHelper:ParseKV(t, result)
             local isBuilding = info["Building"] or info["ConstructionSize"]
             if isBuilding then
                 if result[name] then
-                    BuildingHelper:print("Error: There's more than 2 entries for "..name)
+                    BuildingHelper:print("Error: There's more than 2 entries for "..name) 
                 else
                     result[name] = info
                 end

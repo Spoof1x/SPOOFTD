@@ -7,5 +7,6 @@
         <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/selection.xml" />
         <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/timers/start_game.xml" />
         <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/hud/hud.xml" />
+        <CustomUIElement type="Hud"  layoutfile="file://{resources}/layout/custom_game/hud/minimap/minimap.xml" />
     </Panel>
 </root> 

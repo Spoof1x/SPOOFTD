@@ -15,8 +15,10 @@
 			"AttributeBaseAgility"		"0"
 			"AttributeAgilityGain"		"0"
 	        "MovementSpeed"        "550"
-	        "StatusHealth"   "110"
+	        "StatusHealth"   "10"
 	        "StatusHealthRegen"  "0"
+			"AttackDamageMin"			"10"		
+			"AttackDamageMax"			"20"	
 	        
 	    }
 }

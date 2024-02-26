@@ -77,7 +77,7 @@
 	{
 		"UnitName"						"repair_tower"
 		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"  ""
+		"AbilityTextureName"  			""
 		"MaxLevel" 						"1"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCastPoint"				"0"
@@ -110,6 +110,19 @@
 			"GoldPerSecond"   				"3 5 7 9"
 		}
 		
+	}
+	"repair"
+	{
+		"BaseClass"             		"ability_lua"
+		"ScriptFile" 					"abilities/repair_tower/repair"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCooldown"   "45 38 33 28"
+		"AbilityValues"
+		{
+			"radius"  "600 800 1000 1300"
+			"healPerSecond" "1 2 3 4"
+
+		}
 	}
 	"building_upgrade"
 	{
