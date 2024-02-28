@@ -5,13 +5,14 @@ var skip = false
 // Recieves a list of entities to replace the current selection
 function Selection_New(msg)
 {
+    
     var entities = msg.entities
     //$.Msg("Selection_New ", entities)
     for (var i in entities) {
         if (i==1)
             GameUI.SelectUnit(entities[i], false) //New
         else
-            GameUI.SelectUnit(entities[i], true) //Add
+            GameUI.SelectUnit(entities[i], false) //Add
     };
     OnUpdateSelectedUnit()
 }
@@ -22,9 +23,9 @@ function Selection_Add(msg)
     var entities = msg.entities
     //$.Msg("Selection_Add ", entities)
     for (var i in entities) {
-        GameUI.SelectUnit(entities[i], true)
+        $.Msg(entities)
+        GameUI.SelectUnit(entities[i], false)
     };
-    OnUpdateSelectedUnit()
 }
 
 // Removes a list of entities from the current selection
@@ -33,6 +34,7 @@ function Selection_Remove(msg)
     var remove_entities = msg.entities
     //$.Msg("Selection_Remove ", remove_entities)
     var selected_entities = GetSelectedEntities();
+    
     for (var i in remove_entities) {
         var index = selected_entities.indexOf(remove_entities[i])
         if (index > -1)
@@ -49,7 +51,7 @@ function Selection_Remove(msg)
         if (i==0)
             GameUI.SelectUnit(selected_entities[i], false) //New
         else
-            GameUI.SelectUnit(selected_entities[i], true) //Add
+            GameUI.SelectUnit(selected_entities[i], false) //Add
     };
     OnUpdateSelectedUnit()
 }
@@ -97,6 +99,7 @@ function GetSelectionOverride(entityIndex) {
 function OnUpdateQueryUnit()
 {
     //$.Msg( "OnUpdateQueryUnit ", Players.GetQueryUnit(Players.GetLocalPlayer()));
+    QueryFilter(Players.GetQueryUnit(Players.GetLocalPlayer()))
 }
 
 (function () {

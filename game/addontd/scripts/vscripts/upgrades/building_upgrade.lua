@@ -10,7 +10,7 @@ end
 function building_upgrade:OnSpellStart()
     
     local caster = self:GetCaster()
-    local newBuilding = BuildingHelper:UpgradeBuilding(caster)
+    local newBuilding = BuildingHelper:UpgradeBuilding(caster, nil)
 end
 
 

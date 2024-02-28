@@ -31,7 +31,7 @@ function modifier_repair:OnIntervalThink()
     if not self.ability then return end 
     if self.ability:IsCooldownReady() then 
         if self:GetCaster() then
-            if not  self:GetCaster():HasModifier("modifier_building") then
+            if not  self:GetCaster():HasModifier("modifier_build") then
                 local caster = self:GetCaster()
                 local radius = self.ability:GetSpecialValueFor("radius")
                 local healPerSecond =  self.ability:GetSpecialValueFor("healPerSecond")
@@ -42,11 +42,10 @@ function modifier_repair:OnIntervalThink()
                     for _, unit in pairs(FriendlyUnits) do
                         if unit ~= caster then
                             if unit:GetHealth() ~= unit:GetMaxHealth() then
-                                if not unit:HasModifier("modifier_building") then
+                                if not unit:HasModifier("modifier_build") then
                                     unit:Heal(healPerSecond , self.ability)
                                     self.ability:StartCooldown(self.ability:GetSpecialValueFor("AbilityCooldown"))
                                 end
-                                
                             end
                         end
                     end

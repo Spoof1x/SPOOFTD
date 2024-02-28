@@ -88,8 +88,16 @@ function Build( event )
         -- Units can't attack while building
         unit.original_attack = unit:GetAttackCapability()
         unit:SetAttackCapability(DOTA_UNIT_CAP_NO_ATTACK)
-        unit:AddNewModifier(unit, nil, "modifier_building", {})
-        
+        -- unit:AddNewModifier(unit, nil, "modifier_building", {})
+        -- unit:RemoveAbility("destroyer")
+        -- local abil = unit:AddAbility("cancel_construction")
+        -- abil:SetLevel(1)
+         for i = 0, unit:GetAbilityCount() - 1 do
+             local abilityunit = unit:GetAbilityByIndex(i)
+             if abilityunit then
+                 abilityunit:SetActivated(false)
+            end
+         end
 
        
         unit.gold_cost = gold_cost
@@ -98,45 +106,47 @@ function Build( event )
         -- FindClearSpace for the builder
         FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), true)
         caster:AddNewModifier(caster, nil, "modifier_phased", {duration=0.03})
-
-        -- Remove invulnerability on npc_dota_building baseclass
+        unit:AddNewModifier(caster, nil, "modifier_build", {})
         unit:RemoveModifierByName("modifier_invulnerable")
-        _G.towers[unit:GetTeamNumber()] = _G.towers[unit:GetTeamNumber()] + 1
+        _G.lua.towers[unit:GetPlayerOwnerID()] = _G.lua.towers[unit:GetPlayerOwnerID()] + 1
         CustomGameEventManager:Send_ServerToTeam(unit:GetTeamNumber(), "update_CountTowers", {
-			count  = _G.towers, 
+			count  = _G.lua.towers, 
 		})
     end)
-
     -- A building finished construction
     event:OnConstructionCompleted(function(unit)
         BuildingHelper:print("Completed construction of " .. unit:GetUnitName() .. " " .. unit:GetEntityIndex())
-        
-        
         ParticleManager:DestroyParticle(unit.particle, false)
         -- Remove the item
         if unit.item_building_cancel then
             UTIL_Remove(unit.item_building_cancel)
         end
-        
-        
-
+        -- unit:RemoveAbility("cancel_construction")
+        -- local abil = unit:AddAbility("destroyer")
+        -- abil:SetLevel(1)
+        for i = 0, unit:GetAbilityCount() - 1 do
+            local abilityunit = unit:GetAbilityByIndex(i)
+            if abilityunit  then
+                abilityunit:SetActivated(true)
+            end
+        end
         -- Give the unit their original attack capability
         unit:SetAttackCapability(unit.original_attack)
-        unit:RemoveModifierByName("modifier_building")
-
+        unit:RemoveModifierByName("modifier_build")
+        if PlayerResource:IsUnitSelected(playerID, unit) then
+            PlayerResource:AddToSelection(playerID, unit)
+            PlayerResource:RefreshSelection()
+        end
     end)
-
     -- These callbacks will only fire when the state between below half health/above half health changes.
     -- i.e. it won't fire multiple times unnecessarily.
     event:OnBelowHalfHealth(function(unit)
         BuildingHelper:print(unit:GetUnitName() .. " is below half health.")
     end)
-
     event:OnAboveHalfHealth(function(unit)
         BuildingHelper:print(unit:GetUnitName().. " is above half health.")        
     end)
 end
-
 -- Called when the Cancel ability-item is used
 function CancelBuilding( keys )
     local building = keys.unit
@@ -144,28 +154,23 @@ function CancelBuilding( keys )
     local playerID = building:GetPlayerOwnerID()
     local construction_size = building.construction_size
     local location = {x = building:GetAbsOrigin().x, y = building:GetAbsOrigin().y}
-    
     BuildingHelper:print("CancelBuilding "..building:GetUnitName().." "..building:GetEntityIndex())
-    
     BuildingHelper:RemoveGridType(construction_size, location, "BLOCKED")
     BuildingHelper:AddGridType(construction_size, location, "BUILDABLE")
-    
-    
     -- Refund here
     if building.gold_cost then
         hero:ModifyGold(building.gold_cost, false, 0)
         SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, hero, building.gold_cost, nil)
     end
-
     -- Eject builder
     local builder = building.builder_inside
     if builder then
         BuildingHelper:ShowBuilder(builder)
     end
     UTIL_Remove(building)--This will call RemoveBuilding
-    _G.towers[hero:GetTeamNumber()] = _G.towers[hero:GetTeamNumber()] - 1
+    _G.lua.towers[playerID] = _G.lua.towers[playerID] - 1
         CustomGameEventManager:Send_ServerToTeam(hero:GetTeamNumber(), "update_CountTowers", {
-		count  = _G.towers, 
+		count  = _G.lua.towers, 
 	})
 end
                       

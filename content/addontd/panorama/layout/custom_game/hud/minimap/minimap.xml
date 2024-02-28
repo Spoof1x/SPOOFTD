@@ -9,5 +9,6 @@
 	</styles>
 	<Panel class="MinimapRoot">
 		<DOTAMinimap id="minimap" require-composition-layer="true" />
+		<ToggleButton id="MiniMapMaximizeOrMinimize" onselect="MiniMapMaximize()" ondeselect="MiniMapMinimize()" />
 	</Panel>
 </root>

@@ -4,10 +4,91 @@
 	"Tokens"
 	{		
 		"addon_game_name"			"SpoofTD"
+		// названия команд 
         "DOTA_GOODGUYS"    "Команда поросят"
         "DOTA_BADGUYS"    "Команда крокодилов"
         "DOTA_CUSTOM1"  "Команда огурчиков"
         "DOTA_CUSTOM2"  "Команда помидорчиков"
-		"not_enough_gold" "Не хватает золота"
+		
+		
+		
+		
+		
+
+
+
+		// gold tower
+		"gold_tower" "Башня золота"
+		"gold_tower_upgrade1"  "Башня золото 2 уровня"
+		"gold_tower_upgrade2"  "Башня золото 3 уровня"
+		"gold_tower_upgrade3"  "Башня золото 4 уровня"
+		"DOTA_Tooltip_ability_gold_tower_Description"  "Создает Золотую Башню первого уровня. Золотая башня приносит золота в зависимости от уровня башни"
+		"DOTA_Tooltip_ability_gold_tower"  "Золотая Башня"
+
+
+		// water tower
+
+		"water_tower"  "Водная Башня"
+		"DOTA_Tooltip_ability_water_tower_Description"  "Создает Водную Башню первого уровня"
+		"DOTA_Tooltip_ability_water_tower"  "Водная Башня"
+
+		// fire tower
+
+		"fire_tower"  "Огненная Башня"
+		"DOTA_Tooltip_ability_fire_tower_Description"  "Создает Огненную Башню первого уровня"
+		"DOTA_Tooltip_ability_fire_tower"  "Огненная Башня"
+
+
+		// repair tower
+		"repair_tower"  "Башня ремонта"
+		"DOTA_Tooltip_ability_repair_tower_Description"  "Создает Башню ремонта первого уровня"
+		"DOTA_Tooltip_ability_repair_tower"  "Башня ремонта"
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// upgrade tower
+		"DOTA_Tooltip_ability_building_upgrade"  "Прокачка Башни"
+		"DOTA_Tooltip_ability_building_upgrade_Description" "Прокачивает определенную Башню на следующий уровень"
+
+		// repair
+		"DOTA_Tooltip_ability_repair"  "ПОЧИНКА"
+		"DOTA_Tooltip_ability_repair_Description"  "Каждые несколько секунд хилит поломонные Башни вокруг себя"
+		"DOTA_Tooltip_ability_GoldMine_GoldPerSecond" "Золото:"
+		
+		//  GoldMine
+		"DOTA_Tooltip_ability_GoldMine"  "ЗОЛОТО"
+		"DOTA_Tooltip_ability_GoldMine_Description"  "Каждые несколько секунд дает золото, зависит от уровня тавера"
+		"DOTA_Tooltip_ability_GoldMine_GoldPerSecond" "Золото:"
+
+
+		// others
+		"DOTA_Tooltip_ability_destroyer" "Продажа Башни"
+		"DOTA_Tooltip_ability_destroyer_Description"  "Продает Башню за 40-50% стоимости"
+
+
+		// creeps
+		"npc_dota_neutral_kobold"   "Человечек"
+		"npc_dota_creep_goodguys_melee"  "Печенька"
+
+		// panorama
+
+		"Hide_Details" "Скрыть статистику"
+		"Show_Details" "Показать статистику"
+		"TD_CreepHP" "Здоровье крипов"
+		"TD_Towers" "Количество Башен"
+		"TD_PlayerIncome"  "Количество денег в 15 секунд"
+		"fixNewWave" "Подготовка к следующей волне"
+		"TD_Gold"  "Золото"
+		"IamReady"  "Готов!"
 	}
 }

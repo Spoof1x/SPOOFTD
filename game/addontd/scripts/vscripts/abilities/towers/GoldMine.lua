@@ -29,7 +29,7 @@ function modifier_GoldMine:OnIntervalThink()
     if not self.ability then return end 
     if self.ability:IsCooldownReady() then 
         if self:GetCaster() then
-            if self:GetCaster():HasModifier("modifier_building") then
+            if self:GetCaster():HasModifier("modifier_build") then
                 return
             end
             if self:GetCaster():GetOwner() then

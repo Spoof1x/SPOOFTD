@@ -18,5 +18,25 @@
             }
         }
     }
+    "cancel_construction"
+	{
+	    // General
+	    //-----------------------------
+	    "BaseClass"                     "ability_datadriven"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "MaxLevel"                      "1"
+	    "AbilityTextureName"            "cancel_construction"
+	
+	    "AbilityMultiOrder" "1"
+	
+	    "OnSpellStart"
+	    {
+	        "RunScript"
+	        {
+	            "ScriptFile"        "upgrades/cancel_construction.lua"
+	            "Function"          "CancelConstruction"
+	        }
+	    }
+	}
     
 }

@@ -1,51 +1,15 @@
 LinkLuaModifier("modifier_nocollision","libraries/modifiers/modifier_nocollision",LUA_MODIFIER_MOTION_NONE)
-
-_G.spawners = {[2] = "path10", [3] = "path100",[6] = "path50", [7] = "path150", }
-_G.spawnersNames = {[2] = "path10", [3] = "path100",[6] = "path50", [7] = "path150"}
-_G.allcreeps = {
-[1]  =  {name = "npc_dota_neutral_kobold", count = 15},
-[2]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-[3]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-[4]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-[5]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-[6]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-[7]  =  {name = "npc_dota_creep_goodguys_melee", count = 10},
-}
-
-
-
 if WaveClass == nil then WaveClass = {} end
-
 function WaveClass:Init()
     WaveClass:StartGameTimer()
-    _G.spawners[2] = Entities:FindByName(nil, _G.spawners[2])
-    _G.spawners[3] = Entities:FindByName(nil, _G.spawners[3])
-    _G.spawners[6] = Entities:FindByName(nil, _G.spawners[6])
-    _G.spawners[7] = Entities:FindByName(nil, _G.spawners[7])
     WaveClass.Settings = LoadKeyValues("scripts/kv/wave_settings.kv")
 end
-
+gamemods = {[1] = "Solo", [2] = "Duo", [3] = "Trio", [4] = "All"}
 function WaveClass:StartGameTimer()
-    local secunds = 10
+    local secunds = 15
     Timers:CreateTimer(0.01, function ()
         if secunds == 0 then 
-            local countplayers = _G.Cplayers
-            if countplayers == 1 then 
-                _G.gamemode = "Solo"
-                WaveClass:IncomeStart(WaveClass.Settings["income"])
-            end
-            if countplayers == 2 then 
-                _G.gamemode = "Duo"
-                WaveClass:IncomeStart(WaveClass.Settings["income"])
-            end
-            if countplayers == 3 then 
-                _G.gamemode = "Trio"
-                WaveClass:IncomeStart(WaveClass.Settings["income"])
-            end
-            if countplayers == 4 then 
-                _G.gamemode = "All"
-                WaveClass:IncomeStart(WaveClass.Settings["income"])
-            end
+            _G.lua.gamemode = gamemods[_G.lua.Cplayers]
             CustomGameEventManager:Send_ServerToAllClients("CloseStartGameTimer", {})
             WaveClass:StartRound()
         end
@@ -56,88 +20,77 @@ function WaveClass:StartGameTimer()
 end
 
 
-
-
 function WaveClass:StartRound()
-    
-    -- CustomGameEventManager:Send_ServerToAllClients("update_round", {
-    --     round = _G.round, 
-    -- })
-    -- CustomGameEventManager:Send_ServerToAllClients("update_CreepName", {
-    --     name  = _G.allcreeps[_G.round[]].name, 
-    -- })
-    -- CustomGameEventManager:Send_ServerToAllClients("update_CreepCounts", {
-    --     count  = _G.allcreeps[_G.round].count, 
-    --     maxcount = _G.allcreeps[_G.round].count
-    -- })
-    local countplayers = _G.Cplayers
-    if _G.gamemode == "Solo" then 
+    WaveClass:IncomeStart(WaveClass.Settings["income"])
+    _G.lua.spawners[2] = Entities:FindByName(nil, _G.lua.spawners[2])
+    _G.lua.spawners[3] = Entities:FindByName(nil, _G.lua.spawners[3])
+    _G.lua.spawners[6] = Entities:FindByName(nil, _G.lua.spawners[6])
+    _G.lua.spawners[7] = Entities:FindByName(nil, _G.lua.spawners[7])
+    if _G.lua.gamemode == "Solo" then 
         WaveClass:StartWave(0)
     end
-    if _G.gamemode == "Duo" then 
+    if _G.lua.gamemode == "Duo" then 
 
         WaveClass:StartWave(0)
         WaveClass:StartWave(1)
     end
-    if _G.gamemode == "Trio" then 
+    if _G.lua.gamemode == "Trio" then 
         WaveClass:StartWave(0)
         WaveClass:StartWave(1)
         WaveClass:StartWave(2)
-        
     end
-    if _G.gamemode == "All" then 
+    if _G.lua.gamemode == "All" then 
         WaveClass:StartWave(0)
         WaveClass:StartWave(1)
         WaveClass:StartWave(2)
         WaveClass:StartWave(3)
     end
-
 end
-
 function WaveClass:StartWave(playerid)
-    if not _G.allcreeps[_G.round[playerid]]  then
+    if not _G.lua.allcreeps[_G.lua.round[playerid]]  then
         print("NEXT ROUND WAS NOT BE FOUND")
         return
     end
-    print("Playerid  ".. playerid .. "  ROUND ".. _G.round[playerid])
-    local team = _G.Players[playerid]:GetTeamNumber()
-    if _G.AliveTeams[team] then
+    print("Playerid  ".. playerid .. "  ROUND ".. _G.lua.round[playerid])
+    local team = _G.lua.Players[playerid]:GetTeamNumber()
+    if _G.lua.AliveTeams[playerid] then
         local spawner =  GetSpawnerAndSpawnerName(team).spawner
         local spawnerNames = GetSpawnerAndSpawnerName(team).spawnerName
-        local count = _G.allcreeps[_G.round[playerid]].count
-
+        local count = _G.lua.allcreeps[_G.lua.round[playerid]].count
         CustomGameEventManager:Send_ServerToTeam(team,"update_round", {
-        round = _G.round[playerid], 
+        round = _G.lua.round[playerid], 
         team = team
         })
         CustomGameEventManager:Send_ServerToTeam(team,"update_CreepName", {
-        name  = _G.allcreeps[_G.round[playerid]].name, 
+        name  = _G.lua.allcreeps[_G.lua.round[playerid]].name, 
         team = team
         })
         CustomGameEventManager:Send_ServerToTeam(team,"update_CreepCounts", {
-        count  = _G.allcreeps[_G.round[playerid]].count, 
-        maxcount = _G.allcreeps[_G.round[playerid]].count,
+        count  = _G.lua.allcreeps[_G.lua.round[playerid]].count, 
+        maxcount = _G.lua.allcreeps[_G.lua.round[playerid]].count,
         team = team
         })
-
-
-
-        _G.CreepCounter[team] = count
-
+        _G.lua.CreepCounter[playerid] = count
+        spawner_unit = CreateUnitByName("npc_dota_companion", spawner:GetAbsOrigin(), false, nil, nil, 0)
+        spawner_unit:AddNewModifier(spawner_unit, nil, "modifier_phased", {})
+        spawner_unit:AddNewModifier(spawner_unit, nil, "modifier_invulnerable", {})
+        spawner_unit:AddNewModifier(spawner_unit, nil, "modifier_unselect", {})
+        local particle = ParticleManager:CreateParticle("particles/wave_part.vpcf", PATTACH_WORLDORIGIN, nil)
+        ParticleManager:SetParticleControl( particle, 0, spawner:GetAbsOrigin())
         Timers:CreateTimer(0.5 , function ()
             count = count - 1
-            local unit = CreatUnit(_G.allcreeps[_G.round[playerid]].name,spawner:GetAbsOrigin(),team, _G.allcreeps[_G.round[playerid]].name, spawnerNames, playerid)
+            local unit = CreatUnit(_G.lua.allcreeps[_G.lua.round[playerid]].name,spawner:GetAbsOrigin(),team, _G.lua.allcreeps[_G.lua.round[playerid]].name, spawnerNames, playerid)
             if count == 0 then
+                ParticleManager:DestroyParticle(particle, true)
+                spawner_unit:Kill(nil,nil)
                 return 
             end
             return 1
         end)
     end
 end
-
-
 function WaveClass:NextWave()
-    _G.round = _G.round + 1
+    _G.lua.round = _G.lua.round + 1
     WaveClass:StartRound() 
 end
 
@@ -148,15 +101,14 @@ function CreatUnit(name, spawner, teamnumber, unitname, spawnerName, id )
     unit:AddNewModifier(unit, nil, "modifier_nocollision", {})
     unit.unitname =  unitname
     unit:SetInitialWaypoint(spawnerName)
-    table.insert(_G.playercreeps[teamnumber], unit) 
+    table.insert(_G.lua.playercreeps[id], unit) 
     return unit
 end
 
-_G.checkforKill = {}
-function WaveClass:KillsAllCreeps(pTEAMNUMBER)
+function WaveClass:KillsAllCreeps(pID)
     Timers:CreateTimer(0.01,function ()
-            if WaveClass:countCheck(_G.playercreeps[pTEAMNUMBER]) > 0 then
-                for i, unit in pairs(_G.playercreeps[pTEAMNUMBER]) do
+            if WaveClass:countCheck(_G.lua.playercreeps[pID]) > 0 then
+                for i, unit in pairs(_G.lua.playercreeps[pID]) do
                     UTIL_Remove(unit)
                 end
                 
@@ -164,52 +116,21 @@ function WaveClass:KillsAllCreeps(pTEAMNUMBER)
         return 1
     end)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function GetSpawnerAndSpawnerName(team)
+function GetSpawnerAndSpawnerName(pTeam)
     data = {
-        spawner = _G.spawners[team],
-        spawnerName =  _G.spawnersNames[team]
+        spawner = _G.lua.spawners[pTeam],
+        spawnerName =  _G.lua.spawnersNames[pTeam]
     }
     return data
 end
 function WaveClass:IncomeStart(percent)
-    Timers:CreateTimer(5, function ()
+    Timers:CreateTimer(0, function ()
 
-        for i = 0, _G.Cplayers - 1 do
-            local player = _G.Players[i]    
+        for i = 0, _G.lua.Cplayers - 1 do
+            local player = _G.lua.Players[i]    
             if player then
                 
-                if _G.incomes[i] then
+                if _G.lua.incomes[i] then
                    
                     SendOverheadEventMessage(nil, OVERHEAD_ALERT_GOLD, player, percent*player:GetGold(), nil)
                     player:ModifyGold(percent*player:GetGold(), true, 0)
@@ -226,4 +147,37 @@ function WaveClass:countCheck(table)
         count = count + 1
     end
     return count
+end
+
+function HeroIsReadyReal(_,event)
+    _G.lua.Teams[event.id] = true
+    _G.lua.RealReady[event.id] = true
+    _G.lua.TimeRealReady[event.id] = 6
+    Timers:CreateTimer(0.00001, function ()
+        if _G.lua.RealReady[event.id] then
+            
+            _G.lua.TimeRealReady[event.id] = _G.lua.TimeRealReady[event.id] - 1
+            CustomGameEventManager:Send_ServerToTeam(_G.lua.Players[event.id]:GetTeamNumber(),"UpdateReadyTimer", {
+                sec = _G.lua.TimeRealReady[event.id],
+            })
+            if _G.lua.TimeRealReady[event.id] == 0 then
+                _G.lua.stoptimer[event.id] = false
+                _G.lua.RealReady[event.id] = false
+                _G.lua.timerswaves[event.id].secund = 30
+	            _G.lua.timerswaves[event.id].fullsecund = 30
+                _G.lua.round[event.id] = _G.lua.round[event.id] + 1
+                _G.lua.incomes[event.id] = true
+                WaveClass:StartWave(event.id)
+                CustomGameEventManager:Send_ServerToTeam(_G.lua.Players[event.id]:GetTeamNumber(),"EndReadyTimer", {})
+                
+            end
+            return 1
+
+        end
+    end)
+end
+
+function HeroIsReadyCancel(_,event)
+    _G.lua.RealReady[event.id] = false
+    _G.lua.Teams[event.id] = false
 end

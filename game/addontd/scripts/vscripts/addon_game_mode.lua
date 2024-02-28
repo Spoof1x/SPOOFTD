@@ -1,28 +1,8 @@
-
-
+_G.lua = {}
+require("constants")
 require("libraries/buildinghelper")
 require("libraries/pathfix")
 require("waves")
-_G.killscreeps = {}
-_G.CreepCounter = {}
-_G.Teams = {}
-_G.gamemode = "no"
-_G.Players = {}
-_G.Cplayers = 0
-_G.TeamNumber = {
-	good = "2",
-	bad = "3",
-	custom1 = "6",
-	custom2 = "7",
-}
-_G.AliveTeams = {}
-_G.round = {}
-_G.towers = {}
-_G.creeps = 0
-_G.maxcreeps = 0
-_G.incomes = {}
-_G.playercreeps = {}
-_G.timerswaves = {}
 
 
 
@@ -48,7 +28,7 @@ function Game:InitGameMode()
     GameRules:SetShowcaseTime(0.0)
 	GameRules:SetPreGameTime(0.0)
 	GameRules:GetGameModeEntity():SetCustomGameForceHero("npc_dota_hero_antimage")
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 0.1 )
 	-- teams
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS, 1)
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS, 1)
@@ -65,6 +45,11 @@ function Game:InitGameMode()
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(Game, 'OnNPCSpawned'), self)
 	ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Game, 'OnGameRuleChange'), Game)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(Game, 'OnUnitKilled'), self)
+
+	CustomGameEventManager:RegisterListener( "HeroIsReadyReal", HeroIsReadyReal ) 
+	CustomGameEventManager:RegisterListener( "HeroIsReadyCancel", HeroIsReadyCancel )
+	CustomGameEventManager:RegisterListener( "SetTableValue", SetTableValue )
+	
 end
 function Game:OnUnitKilled(event)
 	local unit = EntIndexToHScript(event.entindex_killed)
@@ -91,111 +76,123 @@ function Game:OnNPCSpawned(keys)
     end
 end
 function Game:OnThink()
-	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		
-	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
-		return nil
-	end
 	return 1
-end
-function Game:CheckTeams()
 end
 function Game:DeatBuildings(unit)
 	location = {x = unit:GetAbsOrigin().x, y = unit:GetAbsOrigin().y}
 	BuildingHelper:RemoveGridType(unit.construction_size, location, "BLOCKED")
 	BuildingHelper:AddGridType(unit.construction_size, location, "BUILDABLE")
-	_G.towers[unit:GetTeamNumber()] = _G.towers[unit:GetTeamNumber()] - 1
+	_G.lua.towers[unit:GetPlayerOwnerID()] = _G.lua.towers[unit:GetPlayerOwnerID()] - 1
 	CustomGameEventManager:Send_ServerToTeam(unit:GetTeamNumber(), "update_CountTowers", {
-	count  = _G.towers,
+	count  = _G.lua.towers,
 	})
 	
 end
 function Game:DeatRealHero(unit)
 	local id = unit:GetPlayerID()
-	_G.Players[id] = nil 
-	_G.AliveTeams[unit:GetTeamNumber()] = nil
-	_G.Teams[unit:GetTeamNumber()] = nil
-	_G.Cplayers = _G.Cplayers - 1
+	_G.lua.Players[id] = nil 
+	_G.lua.AliveTeams[id] = nil
+	_G.lua.Teams[id] = nil
+	_G.lua.Cplayers = _G.lua.Cplayers - 1
 	Game:CheckTeamsOnWin()
 	unit:SetTimeUntilRespawn(9999)
 	unit:SetBuybackCooldownTime(99999)
-	WaveClass:KillsAllCreeps(unit:GetTeamNumber())
+	WaveClass:KillsAllCreeps(id)
 end
 function Game:DeatCreep(unit)
-	_G.killscreeps[unit.teamnumber] = _G.killscreeps[unit.teamnumber] + 1
-	_G.CreepCounter[unit.teamnumber] = _G.CreepCounter[unit.teamnumber] - 1
-	_G.creeps = _G.creeps - 1
-	for i, unittable in pairs(_G.playercreeps[unit.teamnumber]) do
+	_G.lua.killscreeps[unit.playerid] = _G.lua.killscreeps[unit.playerid] + 1
+	_G.lua.CreepCounter[unit.playerid] = _G.lua.CreepCounter[unit.playerid] - 1
+	for i, unittable in pairs(_G.lua.playercreeps[unit.playerid]) do
 		if unit == unittable then
-			table.remove(_G.playercreeps[unit.teamnumber], i)
+			table.remove(_G.lua.playercreeps[unit.playerid], i)
 			break  -- Выходим из цикла, так как элемент уже найден и удален
 		end
 	end
-	
 	CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "update_CreepCounts", {
-		count = _G.CreepCounter[unit.teamnumber], 
-		maxcount = _G.allcreeps[_G.round[unit.playerid]].count,
+		count = _G.lua.CreepCounter[unit.playerid], 
+		maxcount = _G.lua.allcreeps[_G.lua.round[unit.playerid]].count,
 		team = unit.teamnumber
 	})
-	if _G.CreepCounter[unit.teamnumber] == 0 then
+	if _G.lua.CreepCounter[unit.playerid] == 0 then
 		CheckNextWave(unit)
 	end
 end
 
 
 function CheckNextWave(unit)
-	_G.Teams[unit.teamnumber] = false
-	_G.round[unit.playerid] = _G.round[unit.playerid] + 1
+	_G.lua.Teams[unit.playerid] = false
 		Timers:CreateTimer(0.01, function ()
-			if _G.Teams[unit.teamnumber] == false then
-				if not  _G.timerswaves[unit.playerid] then
-					_G.timerswaves[unit.playerid] = {}
-					_G.timerswaves[unit.playerid].secund = 30
-					_G.timerswaves[unit.playerid].fullsecund = 30
+			if  _G.lua.stoptimer[unit.playerid] == false then
+				_G.lua.stoptimer[unit.playerid] = true
+				return
+			end
+			if _G.lua.Teams[unit.playerid] == false then
+				if not  _G.lua.timerswaves[unit.playerid] then
+					_G.lua.timerswaves[unit.playerid] = {}
+					_G.lua.timerswaves[unit.playerid].secund = 30
+					_G.lua.timerswaves[unit.playerid].fullsecund = 30
 				end
+				_G.lua.timerswaves[unit.playerid].secund  = _G.lua.timerswaves[unit.playerid].secund  - 1
+				
 				CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "EndWave", {
-					sec = _G.timerswaves[unit.playerid].secund,
-					fullsec = _G.timerswaves[unit.playerid].fullsecund
+					sec = _G.lua.timerswaves[unit.playerid].secund,
+					fullsec = _G.lua.timerswaves[unit.playerid].fullsecund
 				})
-				_G.timerswaves[unit.playerid].secund = _G.timerswaves[unit.playerid].secund - 1
-				if _G.timerswaves[unit.playerid].secund == 0 then
-					if _G.Teams[unit.teamnumber] == false then
+				if _G.lua.timerswaves[unit.playerid].secund <= 0 then
+					if _G.lua.Teams[unit.playerid] == false then
+						_G.lua.Teams[unit.playerid] = true
+						_G.lua.timerswaves[unit.playerid].secund = 30
+						_G.lua.timerswaves[unit.playerid].fullsecund = 30
+						_G.lua.round[unit.playerid] = _G.lua.round[unit.playerid] + 1
+						CustomGameEventManager:Send_ServerToTeam(_G.lua.Players[unit.playerid]:GetTeamNumber(),"EndReadyTimer", {})
+						_G.lua.incomes[unit.playerid] = true
 						WaveClass:StartWave(unit.playerid)
-						_G.Teams[unit.teamnumber] = true
-						_G.timerswaves[unit.playerid].secund = 30
-						_G.timerswaves[unit.playerid].fullsecund = 30
+						
+						return
 					end
 				end
-				return 1
 			end
-			return 
+			return 1
 		end)
 end
 function Game:SpawnRealHero(unit)
 	
 	local id = unit:GetPlayerID()
 	unit.builderG = true
-	_G.Players[id] = unit
-	_G.AliveTeams[unit:GetTeamNumber()] = true
-	_G.Teams[unit:GetTeamNumber()] = false
-	_G.killscreeps[unit:GetTeamNumber()] = 0
-	_G.Cplayers = _G.Cplayers + 1
-	_G.towers[unit:GetTeamNumber()] = 0
-	_G.incomes[id] = true
-	_G.playercreeps[unit:GetTeamNumber()] = {}
-	_G.round[id] = 1
+	_G.lua.Players[id] = unit
+	_G.lua.AliveTeams[id] = true
+	_G.lua.Teams[id] = false
+	_G.lua.killscreeps[id] = 0
+	_G.lua.Cplayers = _G.lua.Cplayers + 1
+	_G.lua.towers[id] = 0
+	_G.lua.incomes[id] = true
+	_G.lua.playercreeps[id] = {}
+	_G.lua.round[id] = 1
 	unit:FindAbilityByName("gold_tower"):SetLevel(1)
 	unit:FindAbilityByName("repair_tower"):SetLevel(1)
 end
 function Game:CheckTeamsOnWin()
-	print("3 "..WaveClass:countCheck(_G.AliveTeams))
-	if _G.gamemode == "Solo" then
+	if _G.lua.gamemode == "Solo" then
 			GameRules:SetGameWinner(DOTA_TEAM_NEUTRALS)
 	else
-		if WaveClass:countCheck(_G.AliveTeams)== 1 then
-			for  teamnumber, team in pairs(_G.AliveTeams) do
-				GameRules:SetGameWinner(teamnumber)
+		if WaveClass:countCheck(_G.lua.AliveTeams) == 1 then
+			for  teamnumber, team in pairs(_G.lua.AliveTeams) do
+				for i = 0 ,_G.lua.Cplayers - 1 do
+					if _G.lua.Players[i]:GetTeamNumber() == teamnumber then
+						GameRules:SetGameWinner(teamnumber)
+					end
+				end
 			end
 		end
 	end
 end
+
+function SetTableValue(_,event)
+	CustomNetTables:SetTableValue( event.table_name, event.key, event.value )
+end
+
+-- h = function ()
+-- 	CustomNetTables:SetTableValue( "GLOBAL", "G", {G = {
+-- 		towers  =
+-- 	}} )
+-- end

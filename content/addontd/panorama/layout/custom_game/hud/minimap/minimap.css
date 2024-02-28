@@ -3,15 +3,37 @@
     height: fit-children;
     vertical-align: bottom;
     flow-children: right;
+    vertical-align: bottom;
+	background-color: #171c23;
+	border-radius: 2px;
+	/*border-top: 4px solid #fec240;*/
 }
 #minimap{
-    height: 350px;
-    width: 350px;
+    height: 256px;
+    width: 256px;
     vertical-align: bottom;
 }
 
 
+#MiniMapMaximizeOrMinimize{
+    z-index: 1;
+	width: 20px;
+	height: 20px;
+	horizontal-align: right;
+	background-image: url("file://{resources}/images/custom_game/minimap/maximize_icon.png");
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#MiniMapMaximizeOrMinimize .TickBox{
+	visibility: collapse;
+}
 
 
 
 
+#MiniMapMaximizeOrMinimize:selected{
+	background-image: url("file://{resources}/images/custom_game/minimap/minimize_icon.png");
+	wash-color: #fff;
+}

@@ -826,10 +826,13 @@ end
     UpgradeBuilding
     * Replaces a building by a new one by name, updating the necessary references and returning the new created unit
 ]]
-function BuildingHelper:UpgradeBuilding(building)
+function BuildingHelper:UpgradeBuilding(building, newName)
     local oldBuildingName = building:GetUnitName()
-    local upgradeName = BuildingHelper.UnitKV[oldBuildingName]["Upgrade"]
-    local newName = upgradeName
+    local newName = newName
+    if not newName then
+        local upgradeName = BuildingHelper.UnitKV[oldBuildingName]["Upgrade"]
+        newName = upgradeName
+    end
     local gold_cost = BuildingHelper.UnitKV[newName]["sell"]
     
     
@@ -844,12 +847,19 @@ function BuildingHelper:UpgradeBuilding(building)
     position.z = position.z + model_offset - old_offset
     
     local newBuilding = CreateUnitByName(newName, position, false, nil, nil, building:GetTeamNumber()) 
+
+    if PlayerResource:IsUnitSelected(playerID, building) then
+        PlayerResource:RemoveFromSelection(playerID, building)
+        PlayerResource:AddToSelection(playerID, newBuilding)
+        PlayerResource:RefreshSelection()
+    end
+    
     newBuilding:SetOwner(hero)
     newBuilding:SetControllableByPlayer(playerID, true)
     newBuilding:SetNeverMoveToClearSpace(true)
     newBuilding:SetAbsOrigin(position)
     newBuilding.state = "building"
-
+    newBuilding.upgradedFrom = building:GetUnitName()
     local build_time = BuildingHelper.UnitKV[newName]["BuildTime"]
     local hit_points = newBuilding:GetMaxHealth()
     local initial_health = 0.10 * hit_points
@@ -857,9 +867,18 @@ function BuildingHelper:UpgradeBuilding(building)
     local update_health_interval = build_time / math.floor(hit_points-initial_health) -- health to add every tick
     newBuilding:SetHealth(initial_health)
     newBuilding.bUpdatingHealth = true
-
-    newBuilding:AddNewModifier(building, nil, "modifier_building", {})
-    newBuilding:AddNewModifier(building, nil, "modifier_build", {})
+    -- newBuilding:RemoveAbility("destroyer")
+    -- local abil = newBuilding:AddAbility("cancel_construction")
+    -- abil:SetLevel(1)
+    -- Выдача модификаторов на строительство заменена на отключение абилок
+    -- newBuilding:AddNewModifier(building, nil, "modifier_building", {})
+    -- newBuilding:AddNewModifier(building, nil, "modifier_build", {})
+    for i = 0, newBuilding:GetAbilityCount() - 1 do
+        local abilityunit = newBuilding:GetAbilityByIndex(i)
+        if abilityunit and abilityunit:GetAbilityName() ~= "cancel_construction" then
+            abilityunit:SetActivated(false)
+        end
+    end
 
     newBuilding.particle = ParticleManager:CreateParticle( "particles/items5_fx/repair_kit.vpcf", PATTACH_ABSORIGIN_FOLLOW, newBuilding );
     ParticleManager:SetParticleControlEnt(  newBuilding.particle, 0, newBuilding, PATTACH_POINT_FOLLOW, "attach_hitloc", newBuilding:GetAbsOrigin(), true )
@@ -885,6 +904,16 @@ function BuildingHelper:UpgradeBuilding(building)
                     newBuilding.constructionCompleted = true
                     newBuilding.state = "complete"
                     newBuilding:RemoveModifierByName("modifier_building")
+                    --newBuilding:RemoveAbility("cancel_construction")
+                    -- local abil = newBuilding:AddAbility("destroyer")
+                    -- abil:SetLevel(1)
+                    for i = 0, newBuilding:GetAbilityCount() - 1 do
+                        local abilityunit = newBuilding:GetAbilityByIndex(i)
+                        if abilityunit  then
+                            abilityunit:SetActivated(true)
+                        end
+                    end
+            
                return
             end
         else

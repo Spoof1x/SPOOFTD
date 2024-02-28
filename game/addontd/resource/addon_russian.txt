@@ -79,6 +79,8 @@
 		// creeps
 		"npc_dota_neutral_kobold"   "Человечек"
 		"npc_dota_creep_goodguys_melee"  "Печенька"
+		"npc_dota_skeleton"  "Скелетик"
+		"npc_dota_centaur_outrunner"  "кентаврик"
 
 		// panorama
 
@@ -89,6 +91,8 @@
 		"TD_PlayerIncome"  "Количество денег в 15 секунд"
 		"fixNewWave" "Подготовка к следующей волне"
 		"TD_Gold"  "Золото"
-
-	}
+		"IamReady"  "Готов!"
+		"verticalsub" "Подробный просмотр доуступен только с подпиской"
+		"checkready" "Если активно , то автоматически подтверждает волну"
+	}	
 }

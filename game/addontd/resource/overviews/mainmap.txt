@@ -1,8 +1,8 @@
 mainmap
 {
 	material materials/overviews/mainmap.vmat
-	pos_x -8192
-	pos_y 8192
-	scale 16.000
+	pos_x -8448
+	pos_y 8448
+	scale 16.500
 }
 

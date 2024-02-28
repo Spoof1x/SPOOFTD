@@ -51,3 +51,24 @@ function HideDOTAMinimap() {
         $.Msg("Valve break something again. Can't find panel with id='minimap_container'")
     }
 }
+
+
+
+
+CustomNetTables.SetTableValue = function (table_name, key, value) {
+    GameEvents.SendCustomGameEventToServer( "SetTableValue", {
+        table_name : table_name,
+        key : key,
+        value : value,
+
+    });
+}
+
+
+CustomNetTables.SetTableValue("GLOBAL", "players", {j : 123})
+mas = CustomNetTables.GetTableValue( "GLOBAL", "players" )
+$.Msg(mas)
+
+
+
+

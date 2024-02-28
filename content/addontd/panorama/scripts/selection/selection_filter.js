@@ -1,8 +1,8 @@
 // Defines scripts to set selection redirects
 
 var DESELECT_BUILDINGS = false; // Get only the units when units&buildings are on the same list
-var SELECT_ONLY_BUILDINGS = false; // Get only the buildings when units&buildings are on the same list
-var DISPLAY_RANGE_PARTICLE = false; // Uses the main selected entity to update a particle showing attack range
+var SELECT_ONLY_BUILDINGS = true; // Get only the buildings when units&buildings are on the same list
+var DISPLAY_RANGE_PARTICLE = true; // Uses the main selected entity to update a particle showing attack range
 var rangedParticle
 
 function SelectionFilter( entityList ) {
@@ -30,7 +30,7 @@ function SelectionFilter( entityList ) {
         if (IsCustomBuilding(mainSelected) && Entities.HasAttackCapability(mainSelected))
         {
             var range = Entities.GetAttackRange(mainSelected)
-            rangedParticle = Particles.CreateParticle("particles/ui_mouseactions/range_display.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, mainSelected)
+            rangedParticle = Particles.CreateParticle("particles/custom/ui_mouseactions/range_display.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, mainSelected)
             var position = Entities.GetAbsOrigin(mainSelected)
             position[2] = 380 //Offset
             Particles.SetParticleControl(rangedParticle, 0, position)
@@ -44,6 +44,27 @@ function SelectionFilter( entityList ) {
             GameUI.SelectUnit(overrideEntityIndex, false);
         }
     };
+}
+
+function QueryFilter ( mainSelected ) {
+
+    if (mainSelected != -1 && DISPLAY_RANGE_PARTICLE) {
+
+        // Remove old particle
+        if (rangedParticle)
+            Particles.DestroyParticleEffect(rangedParticle, true)
+
+        // Create range display on the selected ranged attacker
+        if (IsCustomBuilding(mainSelected) && Entities.HasAttackCapability(mainSelected))
+        {
+            var range = Entities.GetAttackRange(mainSelected)
+            rangedParticle = Particles.CreateParticle("particles/custom/ui_mouseactions/range_display_query.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, Players.GetPlayerHeroEntityIndex(Players.GetLocalPlayer()))
+            var position = Entities.GetAbsOrigin(mainSelected)
+            position[2] = 380 //Offset
+            Particles.SetParticleControl(rangedParticle, 0, position)
+            Particles.SetParticleControl(rangedParticle, 1, [range, 0, 0])
+        }
+    }
 }
 
 function DeselectBuildings() {

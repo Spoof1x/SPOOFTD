@@ -85,6 +85,7 @@
         "SelectOnSpawn"				"0"
         "AutoAttacksByDefault"		"1"
         "Level"                     "1"
+        "GoldCost"   "50"
         "sell"                      "10"     //Цена продажи
         "BuildTime"                 "1"     //Время строительства
 
@@ -147,7 +148,7 @@
         "Level"                     "1"
         "sell"                      "25"     //Цена продажи
         "BuildTime"                 "5"     //Время строительства
-
+        "GoldCost"                  "50"
         "Ability1"					"destroyer"
         "Ability2"                  "building_upgrade"	
         "Ability3"					"GoldMine"
@@ -255,9 +256,9 @@
 
         "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
         "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
-        "UpgradeCost"  "50"
+        "UpgradeCost"               "50"
         "Upgrade"                   "gold_tower_upgrade2"
-        
+        "GoldCost"                  "25"
     }
     "gold_tower_upgrade2"
     {
@@ -318,7 +319,7 @@
         "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
         "UpgradeCost"  "65"
         "Upgrade"                   "gold_tower_upgrade3"
-        
+        "GoldCost"                  "50"
     }
     "gold_tower_upgrade3"
     {
@@ -377,7 +378,7 @@
 
         "ConstructionSize"          "4"      //Блокирует строительство других зданий в этой области. Требуется действительный квадрат того же размера. Принимает число.
         "BlockPathingSize"          "0"      //Блокирует путь с объектами-препятствиями для лабиринта. Это может быть 0
-        
+        "GoldCost"                  "65"
     }
     "repair_tower"
     {

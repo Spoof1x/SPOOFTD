@@ -1,9 +1,12 @@
 <root>
    <scripts>
             <include src="file://{resources}/layout/custom_game/hud/hud.js" />
+            <include src="file://{resources}/layout/custom_game/hud/player_tip.js" />
+
     </scripts>
     <styles>
             <include src="file://{resources}/layout/custom_game/hud/hud.css" />
+            <include src="file://{resources}/layout/custom_game/hud/player_tip.css" />
             <include src="s2r://panorama/styles/dotastyles.vcss_c" />
     </styles>
 
@@ -37,16 +40,15 @@
                     <Panel class="GoldContainer">
                         <Image class="GoldIcon" onmouseover="TipsOver(&apos;TD_Gold&apos;,&apos;CurrentGoldText&apos;)" onmouseout="TipsOut()" src="s2r://panorama/images/hud/reborn/gold_small_psd.vtex" />
                         <Label hittest="false" id="CurrentGoldText" html="true" />
-                        
                     </Panel>
                 </Panel>
             </Panel>
         </Panel>
         <Button id="ShowAllStatsButton" class="ShowAllStatsButton" onactivate="SetExpanded()">
-                <Label id="text" text="#Show_Details" />
+                <Label id="text" text="#Hide_Details" />
         </Button>
         <Panel hittest="false" class="SpawnerRoot">
-		<Panel class="VerticalFlow">
+		<Panel class="VerticalFlow" id="VerticalFlow">
 			<Panel class="HorizontalFlow FirstLineContainer">
 				<Label hittest="false" class="WaveText" id="CurrentWaves" text="Раунд: 1" />
 				<Panel hittest="false" class="GameTimerContainer">
@@ -55,16 +57,18 @@
 				</Panel>
 			</Panel>
 			<Panel class="HorizontalFlow SecondLineContainer">
-				<Image class="WaveTimerIcon" src="s2r://panorama/images/hud/skull_stroke_png.vtex" />
-				<Panel class="WaveTimerProgressBackground">
+				<Image id="WaveTimerIcon" class="WaveTimerIcon" src="s2r://panorama/images/hud/skull_stroke_png.vtex" />
+				<Panel class="WaveTimerProgressBackground" id="WaveTimerProgressBackground">
 					<Panel id="WaveTimerProgress" />
 					<Label id="WaveTimersValue" text="15/15" />
 				</Panel>
 			</Panel>
 			<Label id="CreepName" class="CreepName" text="#npc_dota_neutral_kobold"/>
-			
+             <Button id="ButtonReady" class="ButtonReady" onactivate="HeroReady()">
+                <Label id="ButtonReadyText" text="#IamReady" />
+            </Button>
+            <ToggleButton id="ToogleButtonReady" class="ToogleButtonReady" checked="true"  onmouseover="TipsOver(&apos;checkready&apos;,&apos;ToogleButtonReady&apos;)" onmouseout="TipsOut()" />
 		</Panel>
-	</Panel>
-
-        </Panel>
+    </Panel>
+</Panel>
 </root>

@@ -13,10 +13,10 @@
        transition-property: box-shadow, brightness;
        transition-duration: 0.15s;
        transition-timing-function: ease-in-out;
-    width: fill-parent-flow(1.0);
-    height: 300px;
+        width: fill-parent-flow(1.0);
+        height: 300px;
        padding: 10px;
-    padding-top: 0px;
+        padding-top: 0px;
        vertical-align: bottom;
        background-color: rgba(0, 0, 0, 0.918);
        border-radius: 10px 0px 0px 0px;
@@ -218,6 +218,7 @@
   
    .VerticalFlow{
     flow-children: down;
+    visibility: collapse;
    }
   
    .HorizontalFlow{
@@ -298,4 +299,26 @@
   }
 #CreepName {
     horizontal-align: center;
+}
+#ButtonReady {
+    visibility: collapse;
+    horizontal-align: center;
+    margin-top: 10px;
+    border-radius: 20%;
+    background-color: green;
+}
+
+#ButtonReady:hover {
+    background-color: green;
+}
+
+#ButtonReady:hover #ButtonReadyText{
+    
+    color: white;
+}
+
+
+#ToogleButtonReady {
+    horizontal-align: center;
+    margin-top: 5px;
 }
