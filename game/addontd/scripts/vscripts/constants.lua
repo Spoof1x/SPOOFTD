@@ -1,3 +1,6 @@
+_G.lua.PlayerServerData = {}          -- инфа с сервера // Note: games, wins, mmr , etc
+
+
 _G.lua.killscreeps = {}
 _G.lua.CreepCounter = {} -- число крипов для каждого игрока // Using: print(_G.lua.CreepCounter[PLAYERID])  - Console: 3
 _G.lua.Teams = {}		-- для таймера чтото
@@ -25,8 +28,8 @@ _G.lua.stoptimer = {}				-- я уже сам запутался честно xD
 
 -- waves
 
-_G.lua.spawners = {[2] = "path10", [3] = "path100",[6] = "path50", [7] = "path150",}
-_G.lua.spawnersNames = {[2] = "path10", [3] = "path100",[6] = "path50", [7] = "path150",}
+_G.lua.spawners = {[2] = "path1", [3] = "path100",[6] = "path50", [7] = "path150",}
+_G.lua.spawnersNames = {[2] = "path1", [3] = "path100",[6] = "path50", [7] = "path150",}
 _G.lua.allcreeps = {
 [1]  =  {name = "npc_dota_skeleton", count = 1, health = 100, cost = 5,},
 [2]  =  {name = "npc_dota_neutral_kobold", count = 1, health = 100, cost = 5,},

@@ -23,7 +23,7 @@
                     <Panel class="PanelClass" id="firstColumn">
                         <Image class="IconClass" id="towers" onmouseover="TipsOver(&apos;TD_Towers&apos;,&apos;TowersText&apos;)" onmouseout="TipsOut()" src="file://{images}/statistics/towers_png.png" />
                         <Label hittest="false" id="TowersText" class="ShowAllStatsOnly Last" html="true" text="0"/>
-                    </Panel>
+                    </Panel> 
                     <Panel class="PanelClass" id="secondColumn">
                         <Image class="IconClass" id="creep_hp" onmouseover="TipsOver(&apos;TD_CreepHP&apos;,&apos;creep_hp&apos;)" onmouseout="TipsOut()" src="file://{images}/statistics/creep_hp_png.png" />
                         <Label id="CreepsHealthText" hittest="false" html="true" text="Creeps health: 100" />

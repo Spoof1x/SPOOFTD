@@ -3,7 +3,7 @@ require("constants")
 require("libraries/buildinghelper")
 require("libraries/pathfix")
 require("waves")
-
+require("http")
 
 
 xpTable = {
@@ -49,7 +49,7 @@ function Game:InitGameMode()
 	CustomGameEventManager:RegisterListener( "HeroIsReadyReal", HeroIsReadyReal ) 
 	CustomGameEventManager:RegisterListener( "HeroIsReadyCancel", HeroIsReadyCancel )
 	CustomGameEventManager:RegisterListener( "SetTableValue", SetTableValue )
-	
+	CustomGameEventManager:RegisterListener( "http_request", http_request_client )
 end
 function Game:OnUnitKilled(event)
 	local unit = EntIndexToHScript(event.entindex_killed)
@@ -76,6 +76,7 @@ function Game:OnNPCSpawned(keys)
     end
 end
 function Game:OnThink()
+	Server:UpdateProfiles()
 	return 1
 end
 function Game:DeatBuildings(unit)
@@ -117,8 +118,6 @@ function Game:DeatCreep(unit)
 		CheckNextWave(unit)
 	end
 end
-
-
 function CheckNextWave(unit)
 	_G.lua.Teams[unit.playerid] = false
 		Timers:CreateTimer(0.01, function ()
@@ -132,12 +131,11 @@ function CheckNextWave(unit)
 					_G.lua.timerswaves[unit.playerid].secund = 30
 					_G.lua.timerswaves[unit.playerid].fullsecund = 30
 				end
-				_G.lua.timerswaves[unit.playerid].secund  = _G.lua.timerswaves[unit.playerid].secund  - 1
-				
 				CustomGameEventManager:Send_ServerToTeam(unit.teamnumber, "EndWave", {
 					sec = _G.lua.timerswaves[unit.playerid].secund,
 					fullsec = _G.lua.timerswaves[unit.playerid].fullsecund
 				})
+				_G.lua.timerswaves[unit.playerid].secund  = _G.lua.timerswaves[unit.playerid].secund  - 1
 				if _G.lua.timerswaves[unit.playerid].secund <= 0 then
 					if _G.lua.Teams[unit.playerid] == false then
 						_G.lua.Teams[unit.playerid] = true
@@ -156,7 +154,6 @@ function CheckNextWave(unit)
 		end)
 end
 function Game:SpawnRealHero(unit)
-	
 	local id = unit:GetPlayerID()
 	unit.builderG = true
 	_G.lua.Players[id] = unit
@@ -170,16 +167,30 @@ function Game:SpawnRealHero(unit)
 	_G.lua.round[id] = 1
 	unit:FindAbilityByName("gold_tower"):SetLevel(1)
 	unit:FindAbilityByName("repair_tower"):SetLevel(1)
+	
+	local steamid = PlayerResource:GetSteamID(id)
+
+	http_request("http://spooftd.temp.swtest.ru/getprofile.php?&steamid=".. tostring(steamid), "get", function (data)
+		_G.lua.PlayerServerData[id] = data
+	end)
+	Timers:CreateTimer(5, function ()
+		_G.lua.PlayerServerData[id].games =  _G.lua.PlayerServerData[id].games + 1
+		http_request("http://spooftd.temp.swtest.ru/getprofile.php?&steamid=".. tostring(steamid).. "&mode=edit&games=".. _G.lua.PlayerServerData[id].games, "get", function (data)
+			_G.lua.PlayerServerData[id] = data
+		end)
+	end)
+	
+	
 end
 function Game:CheckTeamsOnWin()
 	if _G.lua.gamemode == "Solo" then
 			GameRules:SetGameWinner(DOTA_TEAM_NEUTRALS)
 	else
 		if WaveClass:countCheck(_G.lua.AliveTeams) == 1 then
-			for  teamnumber, team in pairs(_G.lua.AliveTeams) do
+			for  id, team in pairs(_G.lua.AliveTeams) do
 				for i = 0 ,_G.lua.Cplayers - 1 do
-					if _G.lua.Players[i]:GetTeamNumber() == teamnumber then
-						GameRules:SetGameWinner(teamnumber)
+					if i == id then
+						GameRules:SetGameWinner(_G.lua.Players[i]:GetTeamNumber())
 					end
 				end
 			end
@@ -191,8 +202,3 @@ function SetTableValue(_,event)
 	CustomNetTables:SetTableValue( event.table_name, event.key, event.value )
 end
 
--- h = function ()
--- 	CustomNetTables:SetTableValue( "GLOBAL", "G", {G = {
--- 		towers  =
--- 	}} )
--- end

@@ -1,0 +1,159 @@
+.main {
+    height: 100%;
+    width: 100%;
+}
+
+.IconProfile {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    vertical-align: center;
+    margin-top: 30px;
+    height: 60px;
+    width: 60px;
+
+}
+
+
+
+.IconProfileButton {
+    height: 100%;
+    width: 100%;
+}
+
+.bg_profile {
+    vertical-align: center;
+    horizontal-align: left;
+    margin-left: 200px;
+    height: 30%;
+    width: 30%;
+    
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(221, 151, 0, 0.329);
+    background-color: rgba(48, 94, 153, 0.5);
+   visibility: collapse;
+    border-radius: 20px;
+    
+}
+.avatarIMG {
+    height:100px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: aqua;
+    horizontal-align: left;
+    margin-top: 40px;
+    margin-left: 20px;
+
+
+}
+
+.title_NickName {
+    height:100px;
+    width: 120px;
+    horizontal-align: left;
+    margin-top: 150px;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+.title_profile {
+    horizontal-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.games {
+    vertical-align: top;
+    horizontal-align: center;
+    height: 10%;
+    margin-right: 90px;
+    margin-top: 90px;
+    padding: 1px;
+    width: 80%;
+
+}
+.games_text {
+    margin-left: 150px;
+}
+.wins {
+    vertical-align: top;
+    horizontal-align: center;
+    height: 10%;
+    margin-right: 90px;
+    margin-top: 150px;
+    padding: 1px;
+    width: 80%;
+
+}
+.wins_text {
+    margin-left: 150px;
+}
+
+.mmr {
+    vertical-align: top;
+    horizontal-align: center;
+    height: 10%;
+    margin-right: 90px;
+    margin-top: 210px;
+    padding: 1px;
+    width: 80%;
+
+}
+.mmr_text {
+    margin-left: 150px;
+}
+
+.games_count {
+    margin-left: 400px;
+}
+
+
+.wins_count {
+    margin-left: 400px;
+}
+.mmr_count {
+    margin-left: 400px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.OpenThis
+{
+    opacity: 1;
+    visibility: visible;
+    animation-name: OpenMenu;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    height: 30%;
+    width: 30%;
+    position: 100px -280px 0px;
+}
+@keyframes 'OpenMenu'
+{
+    0%
+    {
+       opacity: 0;
+       position: -500px 0px 0px;
+    }
+    50%
+    {
+        opacity: 0.5;
+    }
+    100%
+    {
+       opacity: 1;
+       position: 100px -280px 0px;
+    }
+}

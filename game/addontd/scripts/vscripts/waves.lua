@@ -18,7 +18,8 @@ function WaveClass:StartGameTimer()
         return 1
     end)
 end
-
+-- local a = "print('Hello, world!')"
+-- loadstring(a)()
 
 function WaveClass:StartRound()
     WaveClass:IncomeStart(WaveClass.Settings["income"])

@@ -67,8 +67,18 @@ CustomNetTables.SetTableValue = function (table_name, key, value) {
 
 CustomNetTables.SetTableValue("GLOBAL", "players", {j : 123})
 mas = CustomNetTables.GetTableValue( "GLOBAL", "players" )
-$.Msg(mas)
 
 
 
 
+
+function http_request(url, method) {
+    GameEvents.SendCustomGameEventToServer( "http_request", {
+        url : url,
+        method : method,
+    });
+}
+
+
+
+//http_request("http://spooftd.temp.swtest.ru/getprofile.php?&steamid=1412&mode=edit&games=123&wins=1234&mmr=0123123", "GET")

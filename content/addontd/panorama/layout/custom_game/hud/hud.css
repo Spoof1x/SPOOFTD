@@ -219,6 +219,7 @@
    .VerticalFlow{
     flow-children: down;
     visibility: collapse;
+    
    }
   
    .HorizontalFlow{
@@ -322,3 +323,13 @@
     horizontal-align: center;
     margin-top: 5px;
 }
+
+.LocalPlayerHighlight {
+    
+    border: 2px solid blue; /* Цвет рамки */
+    border-radius: 5px; /* Скругление углов */
+    box-shadow: 0 0 5px rgba(0, 102, 255, 0.5); /* Тень */
+  }
+  
+  
+  

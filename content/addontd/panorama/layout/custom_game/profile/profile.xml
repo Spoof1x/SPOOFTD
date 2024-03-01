@@ -1,0 +1,38 @@
+<root>
+    <scripts>
+        <include src="file://{resources}/layout/custom_game/profile/profile.js" />
+    </scripts>
+     <styles>
+            <include src="file://{resources}/layout/custom_game/profile/profile.css" />
+            <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+    </styles>
+
+    <Panel class="main" hittest="false">
+        <Image id="IconProfile" class="IconProfile " src="file://{images}/top_bar/profile_png.png">
+			    <Button id="IconProfileButton" class="IconProfileButton" onactivate="IconProfilePress()" >
+			</Button>
+		</Image>
+
+
+        <Image id="bg_profile" class="bg_profile" src="file://{images}/top_bar/bg_profile.png" >
+            <Label id="title_profile" class="title_profile" text="#textprofile" />
+            <DOTAAvatarImage id="avatarIMG" class="avatarIMG" steamid="local" />
+            <DOTAUserName id="title_NickName" class="title_NickName" steamid="local" />
+            <Panel id="games" class="games">
+                <Label id="games_text" class="games_text" text="Количество  каток:" />
+                <Label id="games_count" class="games_count" text="0" />
+            </Panel>
+            <Panel id="wins" class="wins">
+                <Label id="wins_text" class="wins_text" text="Количество побед:" />
+                <Label id="wins_count" class="wins_count" text="0" />
+
+            </Panel>
+            <Panel id="mmr" class="mmr">
+                <Label id="mmr_text" class="mmr_text" text="Количество очков:" />
+                <Label id="mmr_count" class="mmr_count" text="0" />
+            </Panel>
+        </Image>
+
+    </Panel>
+
+</root>

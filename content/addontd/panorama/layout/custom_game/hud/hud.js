@@ -35,15 +35,26 @@ function UpdatePlayer(playerId, container) {
     var playerPanelName = "player_" + playerId;
     var playerPanel = container.FindChild(playerPanelName);
     var playerGold
+    var healthMax = Entities.GetMaxHealth(Players.GetPlayerHeroEntityIndex(playerId));
+    var health = Entities.GetHealth(Players.GetPlayerHeroEntityIndex(playerId));
+    
+    var healthPercent = health / healthMax;
+    
+    if (isNaN(healthPercent)) {healthPercent = 0;}
     if (playerPanel === null) {
         playerPanel = $.CreatePanel("Image", container, playerPanelName);
         playerPanel.BLoadLayout("file://{resources}/layout/custom_game/multiteam_hero_select_overlay_player.xml", false, false);
         playerPanel.AddClass("PlayerPanel");
+        playerhp = $.CreatePanel("Panel", playerPanel, "HealthPlayer")
+        playerhp.style.width = (healthPercent * 100)+'%';
+        playerhp.style.height = 5 + "px"
+        playerhp.style.backgroundColor  = "red"
         playerGold = $.CreatePanel("Label", playerPanel, "GoldPlayer")
         playerGold.style.color = "yellow";
         playerGold.style.marginLeft  = 25+ "px"
-        playerGold.style.fontSize  = 40 + "px"
-    } 
+        playerGold.style.fontSize  = 40 + "px";
+        playerGold.style.fontWeight = "bold";
+    }  
 	var maxPlayersPerRow = 4;
     var playerWidth = 220;
     var playerHeight = 200;
@@ -65,7 +76,14 @@ function UpdatePlayer(playerId, container) {
 	if ( !localPlayerInfo )
 		return;
 	var localPlayerTeamId = localPlayerInfo.player_team_id;
+    
 	var playerPortrait = playerPanel.FindChildInLayoutFile( "PlayerPortrait" );
+    if (playerId == Players.GetLocalPlayer()) {
+        playerPanel.AddClass("LocalPlayerHighlight")
+    }
+
+    
+
     playerPortrait.SetImage( "file://{images}/heroes/" + playerInfo.player_selected_hero + ".png" );
     button = $.CreatePanel("Button", playerPortrait, "SetPlayer" )
     button.style.height = 100 + "px"
@@ -244,14 +262,9 @@ GameEvents.Subscribe( "update_CreepCounts", update_CreepCounts);
 GameEvents.Subscribe( "update_CreepName", update_CreepName);
 GameEvents.Subscribe( "update_CountTowers", update_CountTowers);
 GameEvents.Subscribe( "EndWave", EndWave); 
-
-
 GameEvents.Subscribe( "LockIncome", LockIncome);
 GameEvents.Subscribe( "EndReadyTimer", EndReadyTimer); 
 GameEvents.Subscribe( "UpdateReadyTimer", UpdateReadyTimer); 
-
-
-
 GameEvents.Subscribe( "CloseStartGameTimer", CloseTimer);
 
 

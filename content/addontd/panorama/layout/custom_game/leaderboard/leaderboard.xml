@@ -6,19 +6,25 @@
             <include src="file://{resources}/layout/custom_game/leaderboard/leaderboard.css" />
             <include src="s2r://panorama/styles/dotastyles.vcss_c" />
     </styles>
-    <Panel hittest="false" class="Root">
-		<Button class="OpenUpgrades" onactivate="OpenUpgrades()" />
-		<Panel id="LeftContainer" hittest="false" hittestchildren="true">
-			<Panel id="LeftFirstChild" />
-			<Panel id="LeftSecondChild" />
-			<Panel id="LeftThirdChild" />
-		</Panel>
-		<Panel id="RightContainer" hittest="false" hittestchildren="true">
-			<Panel id="RightFirstChild" />
-		</Panel>
-		<Panel id="StatsContainer" hittest="false" hittestchildren="true">
-			<Panel id="RightSecondChild" />
+	<Panel class="main" hittest="false">
+		<Image id="IconLeaderBoard" class="IconLeaderBoard" src="file://{images}/top_bar/leaderboard_png.png">
+			<Button id="LeaderBoardButton" class="LeaderBoardButton" onactivate="LeaderIconPress()">
+			</Button>
+		</Image>
+
+
+		<Panel id="leaderboard" class="leaderboard">
+			<Image id="leaderboardImg" class="leaderboardImg" src="file://{images}/top_bar/leaderboard.png">
+				<Panel id="first_column" class="first_column">
+					<Label id="nicknames" class="nicknames" text="#nicknames" />
+				</Panel>
+				<Panel id="second_column" class="second_column">
+					<Label id="games" class="games" text="#games" />
+				</Panel>
+				<Panel id="third_column" class="third_column">
+					<Label id="wins" class="wins" text="#wins" />
+				</Panel>
+			</Image>
 		</Panel>
 	</Panel>
-
 </root>
